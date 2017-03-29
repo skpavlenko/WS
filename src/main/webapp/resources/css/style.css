@@ -1,0 +1,240 @@
+a.spoiler:after {
+    content: " [-]";
+}
+
+a.spoiler.collapsed:after {
+    content: " [+]";
+}
+
+.nav-tabs {
+    margin-bottom: 15px;
+}
+
+.breadcrumb > li + li:before {
+    content: "\f105";
+    font-family: FontAwesome;
+}
+
+@media screen and (max-width: 767px) {
+    .masonry[data-columns]::before {
+        content: '1 .col-xs-12';
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .masonry[data-columns]::before {
+        content: '2 .col-xs-6';
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .masonry[data-columns]::before {
+        content: '3 .col-xs-4';
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .masonry[data-columns]::before {
+        content: '3 .col-xs-4';
+    }
+}
+
+#headerwrap {
+    background-image: url(../images/bg-1.jpg);
+    background-repeat: no-repeat;
+    margin-top: -20px;
+    padding-top: 20px;
+    text-align: center;
+    min-height: 500px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#headerwrap h1 {
+    margin-top: 130px;
+    color: #fff;
+    font-size: 5vw;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+#headerwrap h2 {
+    color: #fff;
+    font-size: 3vw;
+    font-weight: 100;
+    letter-spacing: 2px;
+}
+
+#headerwrap i {
+    font-size: 35px;
+    color: #fff;
+}
+
+#headerwrap .spacer {
+    margin-top: 220px;
+}
+
+#carousel {
+    margin-top: -20px;
+}
+
+#masgrid {
+    margin-top: -10px;
+}
+
+.ml {
+    text-align: center;
+}
+
+.centered {
+    text-align: center;
+}
+
+.navbar-brand {
+    height: 60px;
+}
+
+.navbar-nav {
+    font-size: 18px;
+    padding-top: 10px;
+}
+
+#login {
+    padding-top: 10px;
+}
+
+/*для Internet Explorer*/
+
+@font-face {
+    font-family: MagistralC;
+    /* имя шрифта для CSS правил */
+    src: local("MagistralC"), url(../fonts/magistralc-webfont.eot);
+    /* если шрифт не установлен, тогда загружаем его по указанному пути */
+}
+
+/*для других браузеров*/
+
+@font-face {
+    font-family: MagistralC;
+    src: local("MagistralC"), /* проверяем наличие шрифта в ОС пользователя */ url(../fonts/MagistralC.otf);
+    /* если шрифт не установлен, тогда загружаем его по указанному пути */
+}
+
+.navbar-brand {
+    margin-top: 16px;
+    background: url(../images/logo.png);
+    /* Путь к файлу с исходным  рисунком */
+    display: block;
+    /* Рисунок как блочный элемент */
+    width: 205px;
+    /* Ширина рисунка в пикселах */
+    height: 38px;
+    /* Высота рисунка */
+}
+
+.navbar-brand:hover {
+    background-position: 0 -38px;
+}
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        margin-left: 10px;
+    }
+}
+
+.carousel-caption {
+    text-shadow: 0 4px 1px black;
+}
+
+#bow {
+    color: black;
+    text-shadow: 0 4px 1px white;
+}
+
+#bowl {
+    color: black;
+    text-shadow: 0 4px 1px white;
+    text-align: left;
+}
+
+#bowr {
+    color: black;
+    text-shadow: 0 4px 1px white;
+    text-align: right;
+}
+
+#car-bg {
+    background-color: darkgrey;
+}
+
+#wobl {
+    text-align: left;
+}
+
+.todelete {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.todelete div {
+    float: right;
+    width: 2em;
+    max-width: 100%;
+    min-height: 1em;
+}
+
+.todelete div:nth-of-type(odd) {
+    float: left;
+    clear: right;
+}
+
+.todelete input[type="checkbox"] {
+    margin: 10px;
+}
+
+#text {
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto; /* пока поддерживает только Firefox */
+    text-align: justify;
+}
+
+.thumbnail {
+    padding: 10px;
+}
+
+.form-control-file {
+    padding: 10px;
+}
+
+.fa-arrow-right {
+    color: #337ab7;
+}
+
+.carousel-caption h3 {
+    font-size: 2vw;
+}
+
+.carousel-caption h4 {
+    font-size: 1.5vw;
+}
+
+.carousel-caption h3 {
+    font-size: 1.8vmax;
+}
+
+.carousel-caption h4 {
+    font-size: 1.5vmax;
+}
+
+.navbar-toggle {
+    margin-top: 15px;
+}
