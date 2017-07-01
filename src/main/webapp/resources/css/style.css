@@ -238,3 +238,7 @@ a.spoiler.collapsed:after {
 .navbar-toggle {
     margin-top: 15px;
 }
+
+#search {
+    margin-top: 17px;
+}

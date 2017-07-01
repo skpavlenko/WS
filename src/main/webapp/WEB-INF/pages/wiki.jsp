@@ -1,6 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="ru">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +14,7 @@
     <!-- Bootstrap -->
     <link href="resources/css/bootstrap.css" rel="stylesheet">
     <link href="resources/css/font-awesome.css" rel="stylesheet">
+    <link href="resources/css/style.css" rel="stylesheet">
     <script src="resources/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="resources/js/bootstrap.js"></script>
@@ -25,17 +29,14 @@
     <meta name="Keywords"
           content="1С, УПП, Павленко Сергей, Pavlenko Sergey, Коржов Михаил, Spring, Spring Security, Java, Hibernate, бухгалтерский учет, управленческий учет">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-    <link href="resources/css/style.css" rel="stylesheet">
 </head>
 
 <body>
 <%@ include file="/resources/pages/navbar.jsp" %>
 <%--<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->--%>
+
 <div class="container">
-    <h3><a href="/">Contacts List</a></h3>
+    <h3><a href="/wiki">Contacts List</a></h3>
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -56,14 +57,14 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Groups <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/">Default</a></li>
+                            <li><a href="/wiki">Default</a></li>
                             <c:forEach items="${groups}" var="group">
-                                <li><a href="/group/${group.id}">${group.name}</a></li>
+                                <li><a href="/group?group=${group.id}">${group.name}</a></li>
                             </c:forEach>
                         </ul>
                     </li>
                 </ul>
-                <form class="navbar-form navbar-left" role="search" action="/search" method="post">
+                <form id="search" class="navbar-form navbar-left" role="search" action="/search" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" name="pattern" placeholder="Search">
                     </div>
@@ -125,5 +126,8 @@
         });
     });
 </script>
+
+<%--<%@ include file="/resources/pages/footer.jsp" %>--%>
+
 </body>
 </html>

@@ -93,7 +93,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         properties.setProperty("hibernate.hbm2ddl.auto", hbm2dllAuto);
         return properties;
     }
-    @Bean
+   /* @Bean
     public EmbeddedServletContainerFactory servletContainer() {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
             @Override
@@ -101,7 +101,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
                 SecurityConstraint securityConstraint = new SecurityConstraint();
                 securityConstraint.setUserConstraint("CONFIDENTIAL");
                 SecurityCollection collection = new SecurityCollection();
-                collection.addPattern("/*");
+                collection.addPattern("*//*");
                 securityConstraint.addCollection(collection);
                 context.addConstraint(securityConstraint);
             }
@@ -119,5 +119,5 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         connector.setRedirectPort(443);
 
         return connector;
-    }
+    }*/
 }
