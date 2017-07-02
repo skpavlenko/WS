@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+  <definition name="base" template="/WEB-INF/layout/page.jsp">
+    <put-attribute name="navbar" value="/WEB-INF/layout/navbar.jsp" />
+    <put-attribute name="blog" value="/WEB-INF/layout/blog.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+  </definition>
+
+  <definition name="contact_add_page" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/contact_add_page.jsp" />
+  </definition>
+
+  <definition name="group_add_page" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/group_add_page.jsp" />
+  </definition>
+
+  <definition name="index" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/index.jsp" />
+  </definition>
+
+  <definition name="login" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
+  </definition>
+
+  <definition name="partner_add_page" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/partner_add_page.jsp" />
+  </definition>
+
+  <definition name="partners" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/partners.jsp" />
+  </definition>
+
+  <definition name="register" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/register.jsp" />
+  </definition>
+
+  <definition name="wiki" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/wiki.jsp" />
+  </definition>
+
+</tiles-definitions>
