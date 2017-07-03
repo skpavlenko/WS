@@ -26,7 +26,7 @@
     <div class="carousel-inner" role="listbox" style="font-family: MagistralC, sans-serif">
         <div class="item active"><img src="resources/images/slide-1.jpg" class="center-block" alt="">
             <div class="carousel-caption">
-                <h3 class="hidden-xs">Регулярное сопровождение включает комплекс услуг и сервисов по сопровождению
+                <h3 class="hidden-xs">Cопровождение ПО включает комплекс услуг и сервисов по обновлению и доработке
                     систем на базе 1С от компании 1С ЦЕНТР.</h3>
                 <h4 class="hidden-xs">от 150 грн/час</h4>
                 <p class="hidden-sm hidden-md hidden-lg">Сопровождение 1С от 150 грн/час</p>

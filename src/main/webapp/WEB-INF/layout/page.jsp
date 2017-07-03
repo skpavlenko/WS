@@ -35,7 +35,6 @@
 <body>
 <t:insertAttribute name="navbar"/>
 <t:insertAttribute name="body"/>
-<t:insertAttribute name="blog"/>
 <t:insertAttribute name="footer"/>
 </body>
 </html>
