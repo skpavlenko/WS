@@ -4,9 +4,14 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-  <definition name="base" template="/WEB-INF/layout/page.jsp">
+  <definition name="baseblog" template="/WEB-INF/layout/page.jsp">
     <put-attribute name="navbar" value="/WEB-INF/layout/navbar.jsp" />
     <put-attribute name="blog" value="/WEB-INF/layout/blog.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+  </definition>
+
+  <definition name="base" template="/WEB-INF/layout/page.jsp">
+    <put-attribute name="navbar" value="/WEB-INF/layout/navbar.jsp" />
     <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
   </definition>
 
