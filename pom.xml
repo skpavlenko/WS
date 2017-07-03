@@ -15,7 +15,7 @@
   </parent>
 
   <properties>
-     <tiles.version>3.0.1</tiles.version>
+     <tiles.version>3.0.7</tiles.version>
   </properties>
 
   <dependencies>

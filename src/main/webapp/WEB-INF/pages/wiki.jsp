@@ -5,6 +5,17 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page pageEncoding="UTF-8" %>
 
+<link rel="stylesheet" type="text/css" href="resources/css/dataTables.bootstrap.min.css">
+<script type="text/javascript" language="javascript" src="resources/js/jquery.dataTables.min.js">
+</script>
+<script type="text/javascript" language="javascript" src="resources/js/dataTables.bootstrap.min.js">
+</script>
+<script type="text/javascript" class="init">
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+
 <div class="container">
     <h3><a href="/wiki">Contacts List</a></h3>
 
@@ -44,7 +55,7 @@
         </div><!-- /.container-fluid -->
     </nav>
 
-    <table class="table table-striped">
+    <table id="example" class="table table-striped">
         <thead>
         <tr>
             <td></td>
@@ -74,7 +85,8 @@
         </c:forEach>
     </table>
 </div>
-
+<br>
+<br>
 <script>
     $('.dropdown-toggle').dropdown();
 
