@@ -7,6 +7,7 @@
 <div class="container">
     <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/contact/add" method="post">
         <h3>New contact</h3>
+        <input class="form-control form-group" type="text" name="id" placeholder="id" value="${id}" readonly>
         <select class="selectpicker form-control form-group" name="group">
             <option value="-1">Default</option>
             <c:forEach items="${groups}" var="group">

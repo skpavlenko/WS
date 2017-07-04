@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
@@ -148,7 +149,7 @@ public class MyController {
             Partner partner = null;
             if (logo.isEmpty())
                 partner = new Partner(name, topic, url);
-             else try {
+            else try {
                 partner = new Partner(name, topic, url, new javax.sql.rowset.serial.SerialBlob(logo.getBytes()));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -233,7 +234,8 @@ public class MyController {
             model.addAttribute("surname", contact.getSurname());
             model.addAttribute("phone", contact.getPhone());
             model.addAttribute("email", contact.getEmail());
-        };
+        }
+        ;
         model.addAttribute("groups", contactService.listGroups());
         return "contact_add_page";
     }
@@ -273,6 +275,7 @@ public class MyController {
 
     @RequestMapping(value = "/contact/add", method = RequestMethod.POST)
     public String contactAdd(@RequestParam(value = "group") long groupId,
+                             @RequestParam long id,
                              @RequestParam String name,
                              @RequestParam String surname,
                              @RequestParam String phone,
@@ -280,7 +283,16 @@ public class MyController {
                              Model model) {
         Group group = (groupId != DEFAULT_GROUP_ID) ? contactService.findGroup(groupId) : null;
 
-        Contact contact = new Contact(group, name, surname, phone, email);
+        Contact contact = contactService.getContactById(id);
+        if (contact != null) {
+            contact.setGroup(group);
+            contact.setName(name);
+            contact.setSurname(surname);
+            contact.setPhone(phone);
+            contact.setEmail(email);
+        } else {
+            contact = new Contact(group, name, surname, phone, email);
+        };
         contactService.add(contact);
 
         model.addAttribute("groups", contactService.listGroups());
