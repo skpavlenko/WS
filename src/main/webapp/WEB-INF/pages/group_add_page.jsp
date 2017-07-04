@@ -11,8 +11,8 @@
 <script src="resources/js/jquery.min.js"></script>
 <script src="resources/js/bootstrap.js"></script>
 
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<script src="resources/js/html5shiv.min.js"></script>
+<script src="resources/js/respond.min.js"></script>
 <div class="container">
     <form role="form" class="form-horizontal" action="/group/add" method="post">
         <div class="form-group"><h3>New Group</h3></div>
