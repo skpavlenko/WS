@@ -8,7 +8,7 @@
     <form role="form" enctype="multipart/form-data" class="form-horizontal" action="/contact/add" method="post">
         <h3>New contact</h3>
         <select class="selectpicker form-control form-group" name="group">
-            <option value=${grp.id}>${grp.name}</option>
+            <option value="-1">Default</option>
             <c:forEach items="${groups}" var="group">
                 <option value="${group.id}">${group.name}</option>
             </c:forEach>
@@ -23,5 +23,5 @@
 <br>
 <br>
 <script>
-    $('.selectpicker').selectpicker();
+    $('.selectpicker').selectpicker().val(${grp.id}).change();
 </script>
