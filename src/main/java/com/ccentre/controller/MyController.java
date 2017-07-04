@@ -221,6 +221,23 @@ public class MyController {
         return "contact_add_page";
     }
 
+    @RequestMapping("/contact_edit_page")
+    public String contactAddPage(@RequestParam long id,
+                                 Model model) {
+        Contact contact = contactService.getContactById(id);
+
+        if (contact != null) {
+            model.addAttribute("id", id);
+            model.addAttribute("grp", contact.getGroup());
+            model.addAttribute("name", contact.getName());
+            model.addAttribute("surname", contact.getSurname());
+            model.addAttribute("phone", contact.getPhone());
+            model.addAttribute("email", contact.getEmail());
+        };
+        model.addAttribute("groups", contactService.listGroups());
+        return "contact_add_page";
+    }
+
     @RequestMapping("/group_add_page")
     public String groupAddPage() {
         return "group_add_page";

@@ -93,7 +93,7 @@
         <c:forEach items="${contacts}" var="contact">
             <tr>
                 <td><input type="checkbox" name="toDelete[]" value="${contact.id}" id="checkbox_${contact.id}"/></td>
-                <td>${contact.name}</td>
+                <td><a href=/contact_edit_page?id=${contact.id}>${contact.name}</a></td>
                 <td>${contact.surname}</td>
                 <td>${contact.phone}</td>
                 <td>${contact.email}</td>
