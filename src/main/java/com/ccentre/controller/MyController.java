@@ -275,6 +275,22 @@ public class MyController {
 
     @RequestMapping(value = "/contact/add", method = RequestMethod.POST)
     public String contactAdd(@RequestParam(value = "group") long groupId,
+                             @RequestParam String name,
+                             @RequestParam String surname,
+                             @RequestParam String phone,
+                             @RequestParam String email,
+                             Model model) {
+        Group group = (groupId != DEFAULT_GROUP_ID) ? contactService.findGroup(groupId) : null;
+
+        Contact contact = new Contact(group, name, surname, phone, email);
+        contactService.add(contact);
+        model.addAttribute("groups", contactService.listGroups());
+        model.addAttribute("contacts", contactService.list());
+        return "redirect:/wiki";
+    }
+
+    @RequestMapping(value = "/contact/edit", method = RequestMethod.POST)
+    public String contactEdit(@RequestParam(value = "group") long groupId,
                              @RequestParam long id,
                              @RequestParam String name,
                              @RequestParam String surname,
