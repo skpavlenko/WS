@@ -260,7 +260,7 @@ public class MyController {
         model.addAttribute("groups", contactService.listGroups());
         model.addAttribute("contacts", contactService.list(pattern));
         return "wiki";
-    }Ъ
+    }
 
     @RequestMapping(value = "/contact/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteContact(@RequestParam(value = "toDelete[]", required = false) long[] toDelete, Model model) {
