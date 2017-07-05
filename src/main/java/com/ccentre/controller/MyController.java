@@ -259,7 +259,7 @@ public class MyController {
     public String search(@RequestParam String pattern, Model model) {
         model.addAttribute("groups", contactService.listGroups());
         model.addAttribute("contacts", contactService.list(pattern));
-        return "/wiki";
+        return "wiki";
     }
 
     @RequestMapping(value = "/contact/delete", method = RequestMethod.POST)
