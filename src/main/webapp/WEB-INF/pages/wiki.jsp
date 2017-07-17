@@ -5,10 +5,10 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page pageEncoding="UTF-8" %>
 
-<link rel="stylesheet" type="text/css" href="resources/css/dataTables.bootstrap.min.css">
-<script type="text/javascript" language="javascript" src="resources/js/jquery.dataTables.min.js">
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/dataTables.bootstrap.min.css' />"></link>
+<script type="text/javascript" language="javascript" src="<c:url value='/resources/js/jquery.dataTables.min.js' />">
 </script>
-<script type="text/javascript" language="javascript" src="resources/js/dataTables.bootstrap.min.js">
+<script type="text/javascript" language="javascript" src="<c:url value='/resources/js/dataTables.bootstrap.min.js' />">
 </script>
 <script type="text/javascript" class="init">
     $(document).ready(function () {
@@ -64,7 +64,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="/wiki">Default</a></li>
                             <c:forEach items="${groups}" var="group">
-                                <li><a href="/group?group=${group.id}">${group.name}</a></li>
+                                <%--<li><a href="/group?group=${group.id}">${group.name}</a></li>--%>
+                                <li><a href="/group/${group.id}">${group.name}</a></li>
                             </c:forEach>
                         </ul>
                     </li>

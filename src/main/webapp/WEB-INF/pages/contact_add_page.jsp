@@ -4,14 +4,10 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page pageEncoding="UTF-8" %>
-<link href="resources/css/bootstrap.css" rel="stylesheet">
-<link href="resources/css/font-awesome.css" rel="stylesheet">
-<link href="resources/css/style.css" rel="stylesheet">
-<script src="resources/js/jquery.min.js"></script>
-<script src="resources/js/bootstrap.js"></script>
 
-<script src="resources/js/html5shiv.min.js"></script>
-<script src="resources/js/respond.min.js"></script>
+<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+
 <div class="container">
     <form role="form" enctype="multipart/form-data" class="form-horizontal" action=${(id eq null)?"/contact/add":"/contact/edit"} method="post">
     <h3>New contact</h3>

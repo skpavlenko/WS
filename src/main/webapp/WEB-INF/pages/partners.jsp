@@ -55,10 +55,10 @@
 </div>
 <br>
 <br>
-<script src="resources/js/jquery.min.js"></script>
+<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="resources/js/bootstrap.js"></script>
-<script src="resources/js/salvattore.min.js"></script>
+<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+<script src="<c:url value='/resources/js/salvattore.min.js' />"></script>
 
 <script>
 

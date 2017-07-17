@@ -245,8 +245,18 @@ public class MyController {
         return "group_add_page";
     }
 
-    @RequestMapping("/group")
+    /*@RequestMapping("/group")
     public String listGroup(@RequestParam(value = "group") long groupId, Model model) {
+        Group group = (groupId != DEFAULT_GROUP_ID) ? contactService.findGroup(groupId) : null;
+
+        model.addAttribute("groups", contactService.listGroups());
+        model.addAttribute("currentGroup", group);
+        model.addAttribute("contacts", contactService.list(group));
+        return "wiki";
+    }*/
+
+    @RequestMapping("/group/{id}")
+    public String listGroup(@PathVariable(value = "id") long groupId, Model model) {
         Group group = (groupId != DEFAULT_GROUP_ID) ? contactService.findGroup(groupId) : null;
 
         model.addAttribute("groups", contactService.listGroups());
