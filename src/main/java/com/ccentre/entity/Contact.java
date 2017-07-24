@@ -1,6 +1,8 @@
 package com.ccentre.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Contacts")
@@ -17,6 +19,9 @@ public class Contact {
     private String surname;
     private String phone;
     private String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<UserDocument> userDocuments = new HashSet<UserDocument>();
 
     public Contact() {
     }
