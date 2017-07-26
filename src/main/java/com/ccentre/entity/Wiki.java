@@ -1,5 +1,7 @@
 package com.ccentre.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -18,9 +20,10 @@ public class Wiki {
 
     private String name;
     private String description;
-//    private CustomUser customUser;
+    //private CustomUser customUser;
+    @Type(type = "text")
     private String url;
-//    private String date;
+    private Date date;
 
     /*@OneToMany(mappedBy = "userDocuments", cascade = CascadeType.ALL)
     private Set<UserDocument> userDocuments = new HashSet<UserDocument>();*/
@@ -28,13 +31,13 @@ public class Wiki {
     public Wiki() {
     }
 
-    public Wiki(Group group, String name, String description, String url) {
+    public Wiki(Group group, String name, String description, String url, Date date) {
         this.group = group;
         this.name = name;
         this.description = description;
         //this.customUser = customUser;
         this.url = url;
- //       this.date = date;
+        this.date = date;
     }
 
     public long getId() {
@@ -85,13 +88,13 @@ public class Wiki {
         this.url = url;
     }
 
-    /*public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
-    }*/
+    }
 
     /*public Set<UserDocument> getUserDocuments() {
         return userDocuments;

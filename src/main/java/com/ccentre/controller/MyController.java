@@ -1,6 +1,7 @@
 package com.ccentre.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -234,7 +236,8 @@ public class MyController {
             model.addAttribute("description", wiki.getDescription());
             //model.addAttribute("customUser", wiki.getCustomUser());
             model.addAttribute("url", wiki.getUrl());
-            //model.addAttribute("date", wiki.getDate());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            model.addAttribute("date", sdf.format(wiki.getDate()));
         }
         ;
         model.addAttribute("groups", wikiService.listGroups());
@@ -290,11 +293,11 @@ public class MyController {
                           @RequestParam String description,
                           //@RequestParam CustomUser customUser,
                           @RequestParam String url,
-                          //@RequestParam String date,
+                          @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
                           Model model) {
         Group group = (groupId != DEFAULT_GROUP_ID) ? wikiService.findGroup(groupId) : null;
 
-        Wiki wiki = new Wiki(group, name, description, url);
+        Wiki wiki = new Wiki(group, name, description, url, date);
         wikiService.add(wiki);
         model.addAttribute("groups", wikiService.listGroups());
         model.addAttribute("wikis", wikiService.list());
@@ -308,7 +311,7 @@ public class MyController {
                               @RequestParam String description,
                               //@RequestParam CustomUser customUser,
                               @RequestParam String url,
-                              //@RequestParam String date,
+                              @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
                               Model model) {
         Group group = (groupId != DEFAULT_GROUP_ID) ? wikiService.findGroup(groupId) : null;
 
@@ -319,9 +322,9 @@ public class MyController {
             wiki.setDescription(description);
             //wiki.setCustomUser(customUser);
             wiki.setUrl(url);
-            //wiki.setDate(date);
+            wiki.setDate(date);
         } else {
-            wiki = new Wiki(group, name, description, url);
+            wiki = new Wiki(group, name, description, url, date);
         };
         wikiService.add(wiki);
 

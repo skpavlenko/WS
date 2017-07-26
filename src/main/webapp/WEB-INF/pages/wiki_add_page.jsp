@@ -22,7 +22,7 @@
     <input class="form-control form-group" type="text" name="description" placeholder="Description"
            value="${description}">
     <input class="form-control form-group" type="text" name="url" placeholder="URL" value="${url}">
-    <%--<input class="form-control form-group" type="text" name="date" placeholder="Date" value="${date}">--%>
+    <input class="form-control form-group" type="date" name="date" placeholder="Date" value="${date}">
     <input type="submit" class="btn btn-primary" value="Add">
     </form>
 </div>

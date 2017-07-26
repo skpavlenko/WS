@@ -87,7 +87,7 @@
             <td><b>Name</b></td>
             <td><b>Description</b></td>
             <td><b>URL</b></td>
-            <%--<td><b>Date</b></td>--%>
+            <td><b>Date</b></td>
             <td><b>Group</b></td>
         </tr>
         </thead>
@@ -96,8 +96,8 @@
                 <td><input type="checkbox" name="toDelete[]" value="${wiki.id}" id="checkbox_${wiki.id}"/></td>
                 <td><a href=/wiki_edit_page?id=${wiki.id}>${wiki.name}</a></td>
                 <td>${wiki.description}</td>
-                <td>${wiki.url}</td>
-                <%--<td>${wiki.date}</td>--%>
+                <td><a href=${wiki.url}>${wiki.url}</a></td>
+                <td>${wiki.date}</td>
                 <c:choose>
                     <c:when test="${wiki.group ne null}">
                         <td>${wiki.group.name}</td>
