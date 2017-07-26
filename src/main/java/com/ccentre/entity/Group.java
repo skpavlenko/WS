@@ -13,7 +13,7 @@ public class Group {
     private String name;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
-    private List<Contact> contacts = new ArrayList<Contact>();
+    private List<Wiki> wikis = new ArrayList<Wiki>();
 
     public Group() {
     }
@@ -38,11 +38,11 @@ public class Group {
         this.id = id;
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
+    public List<Wiki> getWikis() {
+        return wikis;
     }
 
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
+    public void setContacts(List<Wiki> contacts) {
+        this.wikis = wikis;
     }
 }

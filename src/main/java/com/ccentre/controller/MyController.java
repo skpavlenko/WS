@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import com.ccentre.entity.*;
@@ -35,7 +36,7 @@ public class MyController {
     private PartnerService partnerService;
 
     @Autowired
-    private ContactService contactService;
+    private WikiService wikiService;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -211,33 +212,33 @@ public class MyController {
 
     @RequestMapping("/wiki")
     public String wiki(Model model) {
-        model.addAttribute("groups", contactService.listGroups());
-        model.addAttribute("contacts", contactService.list());
+        model.addAttribute("groups", wikiService.listGroups());
+        model.addAttribute("wikis", wikiService.list());
         return "wiki";
     }
 
-    @RequestMapping("/contact_add_page")
-    public String contactAddPage(Model model) {
-        model.addAttribute("groups", contactService.listGroups());
-        return "contact_add_page";
+    @RequestMapping("/wiki_add_page")
+    public String wikiAddPage(Model model) {
+        model.addAttribute("groups", wikiService.listGroups());
+        return "wiki_add_page";
     }
 
-    @RequestMapping("/contact_edit_page")
-    public String contactAddPage(@RequestParam long id,
+    @RequestMapping("/wiki_edit_page")
+    public String wikiAddPage(@RequestParam long id,
                                  Model model) {
-        Contact contact = contactService.getContactById(id);
+        Wiki wiki = wikiService.getWikiById(id);
 
-        if (contact != null) {
+        if (wiki != null) {
             model.addAttribute("id", id);
-            model.addAttribute("grp", contact.getGroup());
-            model.addAttribute("name", contact.getName());
-            model.addAttribute("surname", contact.getSurname());
-            model.addAttribute("phone", contact.getPhone());
-            model.addAttribute("email", contact.getEmail());
+            model.addAttribute("name", wiki.getName());
+            model.addAttribute("description", wiki.getDescription());
+            //model.addAttribute("customUser", wiki.getCustomUser());
+            model.addAttribute("url", wiki.getUrl());
+            //model.addAttribute("date", wiki.getDate());
         }
         ;
-        model.addAttribute("groups", contactService.listGroups());
-        return "contact_add_page";
+        model.addAttribute("groups", wikiService.listGroups());
+        return "wiki_add_page";
     }
 
     @RequestMapping("/group_add_page")
@@ -257,81 +258,84 @@ public class MyController {
 
     @RequestMapping("/group/{id}")
     public String listGroup(@PathVariable(value = "id") long groupId, Model model) {
-        Group group = (groupId != DEFAULT_GROUP_ID) ? contactService.findGroup(groupId) : null;
+        Group group = (groupId != DEFAULT_GROUP_ID) ? wikiService.findGroup(groupId) : null;
 
-        model.addAttribute("groups", contactService.listGroups());
+        model.addAttribute("groups", wikiService.listGroups());
         model.addAttribute("currentGroup", group);
-        model.addAttribute("contacts", contactService.list(group));
+        model.addAttribute("wikis", wikiService.list(group));
         return "wiki";
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(@RequestParam String pattern, Model model) {
-        model.addAttribute("groups", contactService.listGroups());
-        model.addAttribute("contacts", contactService.list(pattern));
+        model.addAttribute("groups", wikiService.listGroups());
+        model.addAttribute("wikis", wikiService.list(pattern));
         return "wiki";
     }
 
-    @RequestMapping(value = "/contact/delete", method = RequestMethod.POST)
-    public ResponseEntity<Void> deleteContact(@RequestParam(value = "toDelete[]", required = false) long[] toDelete, Model model) {
+    @RequestMapping(value = "/wiki/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deleteWiki(@RequestParam(value = "toDelete[]", required = false) long[] toDelete, Model model) {
         if (toDelete != null)
-            contactService.delete(toDelete);
+            wikiService.delete(toDelete);
 
-        model.addAttribute("groups", contactService.listGroups());
-        model.addAttribute("contacts", contactService.list());
+        model.addAttribute("groups", wikiService.listGroups());
+        model.addAttribute("wikis", wikiService.list());
 
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/contact/add", method = RequestMethod.POST)
-    public String contactAdd(@RequestParam(value = "group") long groupId,
-                             @RequestParam String name,
-                             @RequestParam String surname,
-                             @RequestParam String phone,
-                             @RequestParam String email,
-                             Model model) {
-        Group group = (groupId != DEFAULT_GROUP_ID) ? contactService.findGroup(groupId) : null;
+    @RequestMapping(value = "/wiki/add", method = RequestMethod.POST)
+    public String wikiAdd(@RequestParam(value = "group") long groupId,
+                          @RequestParam String name,
+                          @RequestParam String description,
+                          //@RequestParam CustomUser customUser,
+                          @RequestParam String url,
+                          //@RequestParam String date,
+                          Model model) {
+        Group group = (groupId != DEFAULT_GROUP_ID) ? wikiService.findGroup(groupId) : null;
 
-        Contact contact = new Contact(group, name, surname, phone, email);
-        contactService.add(contact);
-        model.addAttribute("groups", contactService.listGroups());
-        model.addAttribute("contacts", contactService.list());
+        Wiki wiki = new Wiki(group, name, description, url);
+        wikiService.add(wiki);
+        model.addAttribute("groups", wikiService.listGroups());
+        model.addAttribute("wikis", wikiService.list());
         return "redirect:/wiki";
     }
 
-    @RequestMapping(value = "/contact/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/wiki/edit", method = RequestMethod.POST)
     public String contactEdit(@RequestParam(value = "group") long groupId,
-                             @RequestParam long id,
-                             @RequestParam String name,
-                             @RequestParam String surname,
-                             @RequestParam String phone,
-                             @RequestParam String email,
-                             Model model) {
-        Group group = (groupId != DEFAULT_GROUP_ID) ? contactService.findGroup(groupId) : null;
+                              @RequestParam long id,
+                              @RequestParam String name,
+                              @RequestParam String description,
+                              //@RequestParam CustomUser customUser,
+                              @RequestParam String url,
+                              //@RequestParam String date,
+                              Model model) {
+        Group group = (groupId != DEFAULT_GROUP_ID) ? wikiService.findGroup(groupId) : null;
 
-        Contact contact = contactService.getContactById(id);
-        if (contact != null) {
-            contact.setGroup(group);
-            contact.setName(name);
-            contact.setSurname(surname);
-            contact.setPhone(phone);
-            contact.setEmail(email);
+        Wiki wiki = wikiService.getWikiById(id);
+        if (wiki != null) {
+            wiki.setGroup(group);
+            wiki.setName(name);
+            wiki.setDescription(description);
+            //wiki.setCustomUser(customUser);
+            wiki.setUrl(url);
+            //wiki.setDate(date);
         } else {
-            contact = new Contact(group, name, surname, phone, email);
+            wiki = new Wiki(group, name, description, url);
         };
-        contactService.add(contact);
+        wikiService.add(wiki);
 
-        model.addAttribute("groups", contactService.listGroups());
-        model.addAttribute("contacts", contactService.list());
+        model.addAttribute("groups", wikiService.listGroups());
+        model.addAttribute("wikis", wikiService.list());
         return "redirect:/wiki";
     }
 
     @RequestMapping(value = "/group/add", method = RequestMethod.POST)
     public String groupAdd(@RequestParam String name, Model model) {
-        contactService.addGroup(new Group(name));
+        wikiService.addGroup(new Group(name));
 
-        model.addAttribute("groups", contactService.listGroups());
-        model.addAttribute("contacts", contactService.list());
+        model.addAttribute("groups", wikiService.listGroups());
+        model.addAttribute("wikis", wikiService.list());
         return "redirect:/wiki";
     }
 }

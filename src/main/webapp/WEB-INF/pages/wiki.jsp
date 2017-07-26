@@ -41,7 +41,7 @@
 </script>
 
 <div class="container">
-    <h3><a href="/wiki">Contacts List</a></h3>
+    <h3><a href="/wiki">Wiki's List</a></h3>
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -49,13 +49,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul id="groupList" class="nav navbar-nav">
                     <li>
-                        <button type="button" id="add_contact" class="btn btn-default navbar-btn">Add Contact</button>
+                        <button type="button" id="add_wiki" class="btn btn-default navbar-btn">Add Wiki</button>
                     </li>
                     <li>
                         <button type="button" id="add_group" class="btn btn-default navbar-btn">Add Group</button>
                     </li>
                     <li>
-                        <button type="button" id="delete_contact" class="btn btn-default navbar-btn">Delete Contact
+                        <button type="button" id="delete_wiki" class="btn btn-default navbar-btn">Delete Wiki
                         </button>
                     </li>
                     <li class="dropdown">
@@ -85,22 +85,22 @@
         <tr>
             <td></td>
             <td><b>Name</b></td>
-            <td><b>Surname</b></td>
-            <td><b>Phone</b></td>
-            <td><b>E-mail</b></td>
+            <td><b>Description</b></td>
+            <td><b>URL</b></td>
+            <%--<td><b>Date</b></td>--%>
             <td><b>Group</b></td>
         </tr>
         </thead>
-        <c:forEach items="${contacts}" var="contact">
+        <c:forEach items="${wikis}" var="wiki">
             <tr>
-                <td><input type="checkbox" name="toDelete[]" value="${contact.id}" id="checkbox_${contact.id}"/></td>
-                <td><a href=/contact_edit_page?id=${contact.id}>${contact.name}</a></td>
-                <td>${contact.surname}</td>
-                <td>${contact.phone}</td>
-                <td>${contact.email}</td>
+                <td><input type="checkbox" name="toDelete[]" value="${wiki.id}" id="checkbox_${wiki.id}"/></td>
+                <td><a href=/wiki_edit_page?id=${wiki.id}>${wiki.name}</a></td>
+                <td>${wiki.description}</td>
+                <td>${wiki.url}</td>
+                <%--<td>${wiki.date}</td>--%>
                 <c:choose>
-                    <c:when test="${contact.group ne null}">
-                        <td>${contact.group.name}</td>
+                    <c:when test="${wiki.group ne null}">
+                        <td>${wiki.group.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -115,20 +115,20 @@
 <script>
     $('.dropdown-toggle').dropdown();
 
-    $('#add_contact').click(function () {
-        window.location.href = '/contact_add_page';
+    $('#add_wiki').click(function () {
+        window.location.href = '/wiki_add_page';
     });
 
     $('#add_group').click(function () {
         window.location.href = '/group_add_page';
     });
 
-    $('#delete_contact').click(function () {
+    $('#delete_wiki').click(function () {
         var data = {'toDelete[]': []};
         $(":checked").each(function () {
             data['toDelete[]'].push($(this).val());
         });
-        $.post("/contact/delete", data, function (data, status) {
+        $.post("/wiki/delete", data, function (data, status) {
             window.location.reload();
         });
     });

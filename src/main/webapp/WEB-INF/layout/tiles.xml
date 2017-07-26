@@ -15,8 +15,8 @@
     <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
   </definition>
 
-  <definition name="contact_add_page" extends="base">
-    <put-attribute name="body" value="/WEB-INF/pages/contact_add_page.jsp" />
+  <definition name="wiki_add_page" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/wiki_add_page.jsp" />
   </definition>
 
   <definition name="group_add_page" extends="base">

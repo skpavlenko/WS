@@ -23,8 +23,8 @@ public class UserDocument {
 	private byte[] content;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "USER_ID")
-	private Contact contact;
+	@JoinColumn(name = "WIKI_ID")
+	private Wiki wiki;
 	
 	
 	public Integer getId() {
@@ -67,12 +67,12 @@ public class UserDocument {
 		this.content = content;
 	}
 
-	public Contact getContact() {
-		return contact;
+	public Wiki getWiki() {
+		return wiki;
 	}
 
-	public void setUser(Contact contact) {
-		this.contact = contact;
+	public void setWiki(Wiki wiki) {
+		this.wiki = wiki;
 	}
 
 	@Override
