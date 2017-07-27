@@ -31,6 +31,7 @@
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Сервис<b
                         class="caret"></b></a>
                     <ul class="dropdown-menu">
+                        <li><a href="wiki">Вики</a></li>
                         <li><a href="#">Зарегистрироваться</a></li>
                         <li><a href="#">Задать вопрос</a></li>
                         <security:authorize access="hasAnyRole('ADMIN')">
