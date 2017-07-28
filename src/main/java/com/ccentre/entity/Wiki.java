@@ -20,7 +20,10 @@ public class Wiki {
 
     private String name;
     private String description;
-    //private CustomUser customUser;
+
+    @ManyToOne
+    @JoinColumn(name = "customuser_id")
+    private CustomUser customUser;
     @Type(type = "text")
     private String url;
     private Date date;
@@ -72,13 +75,13 @@ public class Wiki {
         this.description = description;
     }
 
-    /*public CustomUser getCustomUser() {
+    public CustomUser getCustomUser() {
         return customUser;
     }
 
     public void setCustomUser(CustomUser customUser) {
         this.customUser = customUser;
-    }*/
+    }
 
     public String getUrl() {
         return url;

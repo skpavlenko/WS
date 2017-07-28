@@ -3,6 +3,9 @@ package com.ccentre.entity;
 import javax.persistence.*;
 import com.ccentre.entity.enums.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class CustomUser {
     @Id
@@ -18,6 +21,9 @@ public class CustomUser {
     private String email;
     private String phone;
     private String skype;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Wiki> wikis = new ArrayList<Wiki>();
 
     public CustomUser(String login, String password, UserRole role) {
         this.login = login;
@@ -91,5 +97,13 @@ public class CustomUser {
 
     public void setSkype(String skype) {
         this.skype = skype;
+    }
+
+    public List<Wiki> getWikis() {
+        return wikis;
+    }
+
+    public void setWikis(List<Wiki> wikis) {
+        this.wikis = wikis;
     }
 }
