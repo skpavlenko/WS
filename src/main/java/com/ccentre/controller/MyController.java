@@ -279,9 +279,7 @@ public class MyController {
     @RequestMapping(value = "/wiki/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteWiki(@RequestParam(value = "toDelete[]", required = false) long[] toDelete, Model model) {
         if (toDelete != null) {
-            long[] arr = new long[toDelete.length-1];
-            System.arraycopy(toDelete, 1, arr, 0, toDelete.length-1);
-            wikiService.delete(arr);}
+            wikiService.delete(toDelete);}
 
         model.addAttribute("groups", wikiService.listGroups());
         model.addAttribute("wikis", wikiService.list());

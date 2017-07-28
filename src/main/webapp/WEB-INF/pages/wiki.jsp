@@ -126,6 +126,7 @@
     $('#delete_wiki').click(function () {
         var data = {'toDelete[]': []};
         $(":checked").each(function () {
+            if($(this).attr('type') == "checkbox")
             data['toDelete[]'].push($(this).val());
         });
         $.post("/wiki/delete", data, function (data, status) {
