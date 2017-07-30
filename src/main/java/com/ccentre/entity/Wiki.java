@@ -12,7 +12,7 @@ import java.util.Set;
 public class Wiki {
     @Id
     @GeneratedValue
-    private long id;
+    private long wikiId;
 
     @ManyToOne
     @JoinColumn(name = "group_id")
@@ -27,9 +27,9 @@ public class Wiki {
     @Type(type = "text")
     private String url;
     private Date date;
+    private Set<UserDocument> userDocuments = new HashSet<UserDocument>(
+            0);
 
-    /*@OneToMany(mappedBy = "userDocuments", cascade = CascadeType.ALL)
-    private Set<UserDocument> userDocuments = new HashSet<UserDocument>();*/
 
     public Wiki() {
     }
@@ -43,12 +43,12 @@ public class Wiki {
         this.date = date;
     }
 
-    public long getId() {
-        return id;
+    public long getWikiId() {
+        return wikiId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setWikiId(long wikiId) {
+        this.wikiId = wikiId;
     }
 
     public Group getGroup() {
@@ -99,11 +99,12 @@ public class Wiki {
         this.date = date;
     }
 
-    /*public Set<UserDocument> getUserDocuments() {
-        return userDocuments;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "wiki")
+    public Set<UserDocument> getUserDocuments() {
+        return this.userDocuments;
     }
 
     public void setUserDocuments(Set<UserDocument> userDocuments) {
         this.userDocuments = userDocuments;
-    }*/
+    }
 }
