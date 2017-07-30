@@ -27,8 +27,8 @@ public class Wiki {
     @Type(type = "text")
     private String url;
     private Date date;
-    private Set<UserDocument> userDocuments = new HashSet<UserDocument>(
-            0);
+    /*private Set<UserDocument> userDocuments = new HashSet<UserDocument>(
+            0);*/
 
 
     public Wiki() {
@@ -99,12 +99,12 @@ public class Wiki {
         this.date = date;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "wiki")
+    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "wiki")
     public Set<UserDocument> getUserDocuments() {
         return this.userDocuments;
     }
 
     public void setUserDocuments(Set<UserDocument> userDocuments) {
         this.userDocuments = userDocuments;
-    }
+    }*/
 }
