@@ -22,7 +22,7 @@ public class CustomUser {
     private String phone;
     private String skype;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customUser", cascade = CascadeType.ALL)
     private List<Wiki> wikis = new ArrayList<Wiki>();
 
     public CustomUser(String login, String password, UserRole role) {
