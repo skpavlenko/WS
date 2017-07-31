@@ -42,7 +42,7 @@ public class Group {
         return wikis;
     }
 
-    public void setContacts(List<Wiki> contacts) {
+    public void setWikis(List<Wiki> wikis) {
         this.wikis = wikis;
     }
 }

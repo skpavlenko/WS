@@ -22,6 +22,9 @@ public class CustomUser {
     private String phone;
     private String skype;
 
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    private List<Wiki> wikis = new ArrayList<Wiki>();
+
     public CustomUser(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
@@ -94,5 +97,13 @@ public class CustomUser {
 
     public void setSkype(String skype) {
         this.skype = skype;
+    }
+
+    public List<Wiki> getWikis() {
+        return wikis;
+    }
+
+    public void setWikis(List<Wiki> wikis) {
+        this.wikis = wikis;
     }
 }

@@ -3,16 +3,14 @@ package com.ccentre.entity;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
-@Table(name = "Wiki")
+@Table(name = "wiki")
 public class Wiki {
     @Id
     @GeneratedValue
-    private long wikiId;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "group_id")
@@ -24,12 +22,13 @@ public class Wiki {
     @ManyToOne
     @JoinColumn(name = "customuser_id")
     private CustomUser customUser;
+
     @Type(type = "text")
     private String url;
     private Date date;
-    /*private Set<UserDocument> userDocuments = new HashSet<UserDocument>(
-            0);*/
 
+    @OneToMany(mappedBy = "wiki", cascade = CascadeType.ALL)
+    private List<UserDocument> userDocuments = new ArrayList<UserDocument>();
 
     public Wiki() {
     }
@@ -43,12 +42,12 @@ public class Wiki {
         this.date = date;
     }
 
-    public long getWikiId() {
-        return wikiId;
+    public long getId() {
+        return id;
     }
 
-    public void setWikiId(long wikiId) {
-        this.wikiId = wikiId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Group getGroup() {
@@ -99,12 +98,11 @@ public class Wiki {
         this.date = date;
     }
 
-    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "wiki")
-    public Set<UserDocument> getUserDocuments() {
-        return this.userDocuments;
+    public List<UserDocument> getUserDocuments() {
+        return userDocuments;
     }
 
-    public void setUserDocuments(Set<UserDocument> userDocuments) {
+    public void setUserDocuments(List<UserDocument> userDocuments) {
         this.userDocuments = userDocuments;
-    }*/
+    }
 }

@@ -232,6 +232,7 @@ public class MyController {
 
         if (wiki != null) {
             model.addAttribute("id", id);
+            model.addAttribute("grp", wiki.getGroup());
             model.addAttribute("name", wiki.getName());
             model.addAttribute("description", wiki.getDescription());
             //model.addAttribute("customUser", wiki.getCustomUser());

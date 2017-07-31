@@ -21,11 +21,11 @@ public class UserDocument {
 	@Lob @Basic(fetch = FetchType.LAZY)
 	@Column(name="content", nullable=false)
 	private byte[] content;
+
 	@ManyToOne
 	@JoinColumn(name = "wiki_id")
 	private Wiki wiki;
-	
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -66,8 +66,6 @@ public class UserDocument {
 		this.content = content;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "WIKI_ID", nullable = false)
 	public Wiki getWiki() {
 		return wiki;
 	}
