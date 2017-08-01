@@ -1,6 +1,8 @@
 package com.ccentre.controller;
 
+import com.ccentre.util.FileValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,12 +13,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -26,6 +32,9 @@ import java.util.List;
 import com.ccentre.entity.*;
 import com.ccentre.entity.enums.*;
 import com.ccentre.service.*;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @Controller
 public class MyController {
@@ -39,6 +48,15 @@ public class MyController {
 
     @Autowired
     private WikiService wikiService;
+
+    @Autowired
+    UserDocumentService userDocumentService;
+
+    @Autowired
+    MessageSource messageSource;
+
+    @Autowired
+    FileValidator fileValidator;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -302,6 +320,16 @@ public class MyController {
         wikiService.add(wiki);
         model.addAttribute("groups", wikiService.listGroups());
         model.addAttribute("wikis", wikiService.list());
+
+        //Documents
+        model.addAttribute("user", wiki);
+
+        FileBucket fileModel = new FileBucket();
+        model.addAttribute("fileBucket", fileModel);
+
+        List<UserDocument> documents = userDocumentService.findAllByWiki(wiki);
+        model.addAttribute("documents", documents);
+
         return "redirect:/wiki";
     }
 
@@ -331,6 +359,16 @@ public class MyController {
 
         model.addAttribute("groups", wikiService.listGroups());
         model.addAttribute("wikis", wikiService.list());
+
+        //Documents
+        model.addAttribute("user", wiki);
+
+        FileBucket fileModel = new FileBucket();
+        model.addAttribute("fileBucket", fileModel);
+
+        List<UserDocument> documents = userDocumentService.findAllByWiki(wiki);
+        model.addAttribute("documents", documents);
+
         return "redirect:/wiki";
     }
 
@@ -341,5 +379,77 @@ public class MyController {
         model.addAttribute("groups", wikiService.listGroups());
         model.addAttribute("wikis", wikiService.list());
         return "redirect:/wiki";
+    }
+
+    @RequestMapping(value = { "/add-document-{userId}" }, method = RequestMethod.GET)
+    public String addDocuments(@PathVariable Long userId, ModelMap model) {
+        Wiki wiki = wikiService.getWikiById(userId);
+        model.addAttribute("user", wiki);
+
+        FileBucket fileModel = new FileBucket();
+        model.addAttribute("fileBucket", fileModel);
+
+        List<UserDocument> documents = userDocumentService.findAllByWiki(wiki);
+        model.addAttribute("documents", documents);
+
+        return "managedocuments";
+    }
+
+
+    @RequestMapping(value = { "/download-document-{userId}-{docId}" }, method = RequestMethod.GET)
+    public String downloadDocument(@PathVariable int userId, @PathVariable Long docId, HttpServletResponse response) throws IOException {
+        UserDocument document = userDocumentService.findById(docId);
+        response.setContentType(document.getType());
+        response.setContentLength(document.getContent().length);
+        response.setHeader("Content-Disposition","attachment; filename=\"" + document.getName() +"\"");
+
+        FileCopyUtils.copy(document.getContent(), response.getOutputStream());
+
+        return "redirect:/add-document-"+userId;
+    }
+
+    @RequestMapping(value = { "/delete-document-{userId}-{docId}" }, method = RequestMethod.GET)
+    public String deleteDocument(@PathVariable int userId, @PathVariable Long docId) {
+        userDocumentService.deleteById(docId);
+        return "redirect:/add-document-"+userId;
+    }
+
+    @RequestMapping(value = { "/add-document-{userId}" }, method = RequestMethod.POST)
+    public String uploadDocument(@Valid FileBucket fileBucket, BindingResult result, ModelMap model, @PathVariable int userId) throws IOException{
+
+        if (result.hasErrors()) {
+            System.out.println("validation errors");
+            Wiki wiki = wikiService.getWikiById(userId);
+            model.addAttribute("user", wiki);
+
+            List<UserDocument> documents = userDocumentService.findAllByWiki(wiki);
+            model.addAttribute("documents", documents);
+
+            return "managedocuments";
+        } else {
+
+            System.out.println("Fetching file");
+
+            Wiki wiki = wikiService.getWikiById(userId);
+            model.addAttribute("user", wiki);
+
+            saveDocument(fileBucket, wiki);
+
+            return "redirect:/add-document-"+userId;
+        }
+    }
+
+    private void saveDocument(FileBucket fileBucket, Wiki wiki) throws IOException{
+
+        UserDocument document = new UserDocument();
+
+        MultipartFile multipartFile = fileBucket.getFile();
+
+        document.setName(multipartFile.getOriginalFilename());
+        document.setDescription(fileBucket.getDescription());
+        document.setType(multipartFile.getContentType());
+        document.setContent(multipartFile.getBytes());
+        document.setWiki(wiki);
+        userDocumentService.saveDocument(document);
     }
 }

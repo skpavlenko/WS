@@ -2,6 +2,7 @@ package com.ccentre.service.impl;
 
 
 import com.ccentre.entity.UserDocument;
+import com.ccentre.entity.Wiki;
 import com.ccentre.repository.UserDocumentRepository;
 import com.ccentre.service.UserDocumentService;
 import com.ccentre.service.impl.UserDocumentServiceImpl;
@@ -26,8 +27,8 @@ public class UserDocumentServiceImpl implements UserDocumentService{
 		return userDocumentRepository.findAll();
 	}
 
-	public List<UserDocument> findAllByUserId(Long userId) {
-		return null; //userDocumentRepository.findAllByUserId(userId);
+	public List<UserDocument> findAllByWiki(Wiki wiki) {
+		return userDocumentRepository.findAllByWiki(wiki);
 	}
 	
 	public void saveDocument(UserDocument document){

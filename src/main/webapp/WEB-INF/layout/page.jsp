@@ -16,6 +16,7 @@
     <link rel="shortcut icon" href="<c:url value='/resources/images/icon.png' />"></link>
     <title>1С ЦЕНТР</title>
     <!-- Bootstrap -->
+    <link href="<c:url value='/resources/css/app.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/resources/css/bootstrap.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/resources/css/font-awesome.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet"></link>
