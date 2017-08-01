@@ -28,7 +28,7 @@
     </form>
     <br>
     <br>
-    <%--<div class="generic-container">
+    <div class="generic-container">
         <div class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading"><span class="lead">List of Documents </span></div>
@@ -98,7 +98,7 @@
         <div class="well">
             Go to <a href="<c:url value='/list' />">Users List</a>
         </div>
-    </div>--%>
+    </div>
 </div>
 <br>
 <br>

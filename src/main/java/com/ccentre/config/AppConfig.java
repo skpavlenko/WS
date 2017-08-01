@@ -40,6 +40,11 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Value("${hbm2ddl.auto}")
     private String hbm2dllAuto;
 
+    @Bean(name="multipartResolver")
+    public StandardServletMultipartResolver resolver(){
+        return new StandardServletMultipartResolver();
+    }
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory
             (DataSource dataSource, JpaVendorAdapter jpaVendeorAdapter)
@@ -98,11 +103,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver() {
         return new TilesViewResolver();
-    }
-
-    @Bean(name="multipartResolver")
-    public StandardServletMultipartResolver resolver(){
-        return new StandardServletMultipartResolver();
     }
 
     /**
