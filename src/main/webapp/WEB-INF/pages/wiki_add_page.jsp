@@ -11,7 +11,7 @@
 
 <div class="container">
     <form role="form" enctype="multipart/form-data" class="form-horizontal" action=${(id eq null)?"/wiki/add":"/wiki/edit"} method="post">
-    <h3>New contact</h3>
+    <h3>New article</h3>
     <input class="form-control form-group" type="text" name="id" placeholder="id" value="${id}" readonly>
     <select class="selectpicker form-control form-group" name="group">
         <option value="-1">Default</option>
@@ -27,6 +27,7 @@
     <input type="submit" class="btn btn-primary" value="Add">
     </form>
     <c:if test = "${id ne null}">
+        <br>
         <span class="well pull-left">
             <a href="<c:url value='/add-document-${id}' />">Click here to upload/manage your documents</a>
         </span>
