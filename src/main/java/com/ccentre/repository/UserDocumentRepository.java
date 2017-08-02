@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface UserDocumentRepository extends JpaRepository<UserDocument, Long> {
+public interface UserDocumentRepository extends JpaRepository<UserDocument, Integer> {
     @Query("SELECT c FROM UserDocument c WHERE c.wiki = :wiki")
     List<UserDocument> findAllByWiki(@Param("wiki") Wiki wiki);
 }

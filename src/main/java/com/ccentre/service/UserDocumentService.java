@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserDocumentService {
 
-	UserDocument findById(Long id);
+	UserDocument findById(Integer id);
 
 	List<UserDocument> findAll();
 	
@@ -15,5 +15,5 @@ public interface UserDocumentService {
 	
 	void saveDocument(UserDocument document);
 	
-	void deleteById(Long id);
+	void deleteById(Integer id);
 }

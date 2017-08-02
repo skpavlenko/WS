@@ -19,7 +19,7 @@ public class UserDocumentServiceImpl implements UserDocumentService{
 	@Autowired
 	UserDocumentRepository userDocumentRepository;
 
-	public UserDocument findById(Long id) {
+	public UserDocument findById(Integer id) {
 		return userDocumentRepository.findOne(id);
 	}
 
@@ -35,7 +35,7 @@ public class UserDocumentServiceImpl implements UserDocumentService{
 		userDocumentRepository.save(document);
 	}
 
-	public void deleteById(Long id){
+	public void deleteById(Integer id){
 		userDocumentRepository.delete(id);
 	}
 	

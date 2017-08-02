@@ -47,4 +47,8 @@
     <put-attribute name="body" value="/WEB-INF/pages/wiki.jsp" />
   </definition>
 
+  <definition name="managedocuments" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/managedocuments.jsp" />
+  </definition>
+
 </tiles-definitions>

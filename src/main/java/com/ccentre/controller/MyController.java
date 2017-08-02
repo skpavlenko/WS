@@ -243,14 +243,6 @@ public class MyController {
     @RequestMapping("/wiki_add_page")
     public String wikiAddPage(ModelMap model) {
         model.addAttribute("groups", wikiService.listGroups());
-        //Documents
-        //model.addAttribute("user", wiki);
-
-        FileBucket fileModel = new FileBucket();
-        model.addAttribute("fileBucket", fileModel);
-
-        /*List<UserDocument> documents = userDocumentService.findAllByWiki(wiki);
-        model.addAttribute("documents", documents);*/
 
         return "wiki_add_page";
     }
@@ -272,14 +264,6 @@ public class MyController {
         }
         ;
         model.addAttribute("groups", wikiService.listGroups());
-        //Documents
-        model.addAttribute("user", wiki);
-
-        FileBucket fileModel = new FileBucket();
-        model.addAttribute("fileBucket", fileModel);
-
-        List<UserDocument> documents = userDocumentService.findAllByWiki(wiki);
-        model.addAttribute("documents", documents);
 
         return "wiki_add_page";
     }
@@ -381,15 +365,6 @@ public class MyController {
         model.addAttribute("groups", wikiService.listGroups());
         model.addAttribute("wikis", wikiService.list());
 
-        //Documents
-        model.addAttribute("user", wiki);
-
-        FileBucket fileModel = new FileBucket();
-        model.addAttribute("fileBucket", fileModel);
-
-        List<UserDocument> documents = userDocumentService.findAllByWiki(wiki);
-        model.addAttribute("documents", documents);
-
         return "redirect:/wiki";
     }
 
@@ -418,7 +393,7 @@ public class MyController {
 
 
     @RequestMapping(value = { "/download-document-{userId}-{docId}" }, method = RequestMethod.GET)
-    public String downloadDocument(@PathVariable int userId, @PathVariable Long docId, HttpServletResponse response) throws IOException {
+    public String downloadDocument(@PathVariable Long userId, @PathVariable Integer docId, HttpServletResponse response) throws IOException {
         UserDocument document = userDocumentService.findById(docId);
         response.setContentType(document.getType());
         response.setContentLength(document.getContent().length);
@@ -430,13 +405,13 @@ public class MyController {
     }
 
     @RequestMapping(value = { "/delete-document-{userId}-{docId}" }, method = RequestMethod.GET)
-    public String deleteDocument(@PathVariable int userId, @PathVariable Long docId) {
+    public String deleteDocument(@PathVariable Long userId, @PathVariable Integer docId) {
         userDocumentService.deleteById(docId);
         return "redirect:/add-document-"+userId;
     }
 
     @RequestMapping(value = { "/add-document-{userId}" }, method = RequestMethod.POST)
-    public String uploadDocument(@Valid FileBucket fileBucket, BindingResult result, ModelMap model, @PathVariable int userId) throws IOException{
+    public String uploadDocument(@Valid FileBucket fileBucket, BindingResult result, ModelMap model, @PathVariable Long userId) throws IOException{
 
         if (result.hasErrors()) {
             System.out.println("validation errors");

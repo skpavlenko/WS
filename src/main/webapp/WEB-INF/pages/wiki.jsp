@@ -89,6 +89,7 @@
             <td><b>URL</b></td>
             <td><b>Date</b></td>
             <td><b>Group</b></td>
+            <td><b>Upload/Download Files</b></td>
         </tr>
         </thead>
         <c:forEach items="${wikis}" var="wiki">
@@ -106,6 +107,7 @@
                         <td>Default</td>
                     </c:otherwise>
                 </c:choose>
+                <td><a href=/add-document-${wiki.id}>Click</a></td>
             </tr>
         </c:forEach>
     </table>
