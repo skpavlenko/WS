@@ -8,6 +8,11 @@
 
 <script src="<c:url value='/resources/js/jquery.min.js' />"></script>
 <script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+<script src="<c:url value='/resources/js/pdfobject.min.js' />"></script>
+<style>
+    .pdfobject-container { height: 500px;}
+    .pdfobject { border: 1px solid #666; }
+</style>
 
 <div class="container">
     <form role="form" enctype="multipart/form-data" class="form-horizontal" action=${(id eq null)?"/wiki/add":"/wiki/edit"} method="post">
@@ -26,6 +31,11 @@
     <input class="form-control form-group" type="date" name="date" placeholder="Date" value="${date}">
     <input type="submit" class="btn btn-primary" value="Add">
     </form>
+    <br>
+    <br>
+    <div id="pdf_view"></div>
+    <br>
+    <br>
     <c:if test = "${id ne null}">
         <br>
         <span class="well pull-left">
@@ -40,4 +50,9 @@
     )
     ;
     $('.selectpicker').selectpicker('render');
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        PDFObject.embed("/resources/images/pdfobject_sample.pdf", "#pdf_view");
+    });
 </script>
