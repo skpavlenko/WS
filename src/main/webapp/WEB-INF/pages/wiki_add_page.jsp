@@ -27,15 +27,18 @@
     <input class="form-control form-group" type="text" name="name" placeholder="Name" value="${name}">
     <input class="form-control form-group" type="text" name="description" placeholder="Description"
            value="${description}">
-    <input class="form-control form-group" type="text" name="url" placeholder="URL" value="${url}">
-    <input class="form-control form-group" type="date" name="date" placeholder="Date" value="${date}">
-    <input type="submit" class="btn btn-primary" value="Add">
+        <input class="form-control form-group" type="text" name="url" placeholder="URL" value="${url}">
+        <input class="form-control form-group" type="date" name="date" placeholder="Date" value="${date}">
+        <input class="form-control-file form-group" type="file" name="pdf" placeholder="PDF">
+        <input type="submit" class="btn btn-primary" value="Add">
     </form>
-    <br>
-    <br>
-    <div id="pdf_view"></div>
-    <br>
-    <br>
+    <c:if test = "${id ne null}">
+        <br>
+        <br>
+        <div id="pdf_view"></div>
+        <br>
+        <br>
+    </c:if>
     <c:if test = "${id ne null}">
         <br>
         <span class="well pull-left">
@@ -51,8 +54,10 @@
     ;
     $('.selectpicker').selectpicker('render');
 </script>
-<script type="text/javascript">
+<c:if test = "${id ne null}">
+    <script type="text/javascript">
     $(document).ready(function(){
-        PDFObject.embed("/resources/images/pdfobject_sample.pdf", "#pdf_view");
+    PDFObject.embed("/pdf/${id}", "#pdf_view");
     });
-</script>
+    </script>
+</c:if>

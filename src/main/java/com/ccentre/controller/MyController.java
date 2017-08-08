@@ -233,6 +233,34 @@ public class MyController {
         return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
     }
 
+    @RequestMapping("/pdf/{wiki_id}")
+    public ResponseEntity<byte[]> onWiki(@PathVariable("wiki_id") long id) {
+        return wikiById(id);
+    }
+
+    private ResponseEntity<byte[]> wikiById(long id) {
+        Wiki wiki = wikiService.getWikiById(id);
+        int blobLength = 0;
+        try {
+            blobLength = (int) wiki.getPdf().length();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        byte[] bytes = new byte[0];
+        try {
+            bytes = wiki.getPdf().getBytes(1, blobLength);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (bytes == null)
+            throw new PhotoNotFoundException();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType("application/pdf"));
+
+        return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
+    }
+
     @RequestMapping("/wiki")
     public String wiki(Model model) {
         model.addAttribute("groups", wikiService.listGroups());
@@ -318,11 +346,20 @@ public class MyController {
                           //@RequestParam CustomUser customUser,
                           @RequestParam String url,
                           @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
+                          @RequestParam MultipartFile pdf,
                           ModelMap model) {
         Group group = (groupId != DEFAULT_GROUP_ID) ? wikiService.findGroup(groupId) : null;
 
-        Wiki wiki = new Wiki(group, name, description, url, date);
+        Wiki wiki = null;
+        if (pdf.isEmpty())
+            wiki = new Wiki(group, name, description, url, date);
+        else try {
+            wiki = new Wiki(group, name, description, url, date, new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         wikiService.add(wiki);
+
         model.addAttribute("groups", wikiService.listGroups());
         model.addAttribute("wikis", wikiService.list());
 
@@ -346,6 +383,7 @@ public class MyController {
                               //@RequestParam CustomUser customUser,
                               @RequestParam String url,
                               @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
+                              @RequestParam MultipartFile pdf,
                               ModelMap model) {
         Group group = (groupId != DEFAULT_GROUP_ID) ? wikiService.findGroup(groupId) : null;
 
@@ -357,8 +395,21 @@ public class MyController {
             //wiki.setCustomUser(customUser);
             wiki.setUrl(url);
             wiki.setDate(date);
+            if (!pdf.isEmpty())
+                try {
+                    wiki.setPdf(new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
         } else {
-            wiki = new Wiki(group, name, description, url, date);
+            if (pdf.isEmpty())
+                wiki = new Wiki(group, name, description, url, date);
+            else try {
+                wiki = new Wiki(group, name, description, url, date, new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         };
         wikiService.add(wiki);
 

@@ -3,6 +3,7 @@ package com.ccentre.entity;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.*;
 
 @Entity
@@ -30,6 +31,9 @@ public class Wiki {
     @OneToMany(mappedBy = "wiki", cascade = CascadeType.ALL)
     private List<UserDocument> userDocuments = new ArrayList<UserDocument>();
 
+    @Type(type = "blob")
+    private Blob pdf;
+
     public Wiki() {
     }
 
@@ -40,6 +44,16 @@ public class Wiki {
         //this.customUser = customUser;
         this.url = url;
         this.date = date;
+    }
+
+    public Wiki(Group group, String name, String description, String url, Date date, Blob pdf) {
+        this.group = group;
+        this.name = name;
+        this.description = description;
+        //this.customUser = customUser;
+        this.url = url;
+        this.date = date;
+        this.pdf = pdf;
     }
 
     public long getId() {
@@ -104,5 +118,13 @@ public class Wiki {
 
     public void setUserDocuments(List<UserDocument> userDocuments) {
         this.userDocuments = userDocuments;
+    }
+
+    public Blob getPdf() {
+        return pdf;
+    }
+
+    public void setPdf(Blob pdf) {
+        this.pdf = pdf;
     }
 }
