@@ -15,36 +15,51 @@
 </style>
 
 <div class="container">
-    <form role="form" enctype="multipart/form-data" class="form-horizontal" action=${(id eq null)?"/wiki/add":"/wiki/edit"} method="post">
     <h3>New article</h3>
-    <input class="form-control form-group" type="text" name="id" placeholder="id" value="${id}" readonly>
-    <select class="selectpicker form-control form-group" name="group">
-        <option value="-1">Default</option>
-        <c:forEach items="${groups}" var="group">
-            <option value="${group.id}">${group.name}</option>
-        </c:forEach>
-    </select>
-    <input class="form-control form-group" type="text" name="name" placeholder="Name" value="${name}">
-    <input class="form-control form-group" type="text" name="description" placeholder="Description"
-           value="${description}">
-        <input class="form-control form-group" type="text" name="url" placeholder="URL" value="${url}">
-        <input class="form-control form-group" type="date" name="date" placeholder="Date" value="${date}">
-        <input class="form-control-file form-group" type="file" name="pdf" placeholder="PDF">
-        <input type="submit" class="btn btn-primary" value="Add">
-    </form>
-    <c:if test = "${id ne null}">
-        <br>
-        <br>
-        <div id="pdf_view"></div>
-        <br>
-        <br>
-    </c:if>
-    <c:if test = "${id ne null}">
-        <br>
-        <span class="well pull-left">
-            <a href="<c:url value='/add-document-${id}' />">Click here to upload/manage your documents</a>
-        </span>
-    </c:if>
+    <div id="exTab2" class="container">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a  href="#1" data-toggle="tab">Text</a>
+            </li>
+            <li><a href="#2" data-toggle="tab">PDF/Files</a>
+            </li>
+        </ul>
+
+        <div class="tab-content ">
+            <div class="tab-pane active" id="1">
+                <form role="form" enctype="multipart/form-data" class="form-horizontal" action=${(id eq null)?"/wiki/add":"/wiki/edit"} method="post">
+                    <input class="form-control form-group" type="text" name="id" placeholder="id" value="${id}" readonly>
+                    <select class="selectpicker form-control form-group" name="group">
+                        <option value="-1">Default</option>
+                        <c:forEach items="${groups}" var="group">
+                            <option value="${group.id}">${group.name}</option>
+                        </c:forEach>
+                    </select>
+                    <input class="form-control form-group" type="text" name="name" placeholder="Name" value="${name}">
+                    <input class="form-control form-group" type="text" name="description" placeholder="Description"
+                           value="${description}">
+                    <input class="form-control form-group" type="text" name="url" placeholder="URL" value="${url}">
+                    <input class="form-control form-group" type="date" name="date" placeholder="Date" value="${date}">
+                    <input class="form-control-file form-group" type="file" name="pdf" placeholder="PDF">
+                    <input type="submit" class="btn btn-primary" value="Add">
+                </form>
+            </div>
+            <div class="tab-pane" id="2">
+                <c:if test = "${id ne null}">
+                    <div id="pdf_view"></div>
+                    <br>
+                    <br>
+                </c:if>
+                <c:if test = "${id ne null}">
+                    <br>
+                    <span class="well pull-left">
+                        <a href="<c:url value='/add-document-${id}' />">Click here to upload/manage your documents</a>
+                    </span>
+                </c:if>
+
+            </div>
+        </div>
+    </div>
 </div>
 <br>
 <br>
