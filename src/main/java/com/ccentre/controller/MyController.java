@@ -284,7 +284,7 @@ public class MyController {
             model.addAttribute("id", id);
             model.addAttribute("grp", wiki.getGroup());
             model.addAttribute("name", wiki.getName());
-            model.addAttribute("description", wiki.getDescription());
+//            model.addAttribute("description", wiki.getDescription());
             model.addAttribute("customUser", wiki.getCustomUser());
             model.addAttribute("url", wiki.getUrl());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -402,7 +402,7 @@ public class MyController {
         if (wiki != null) {
             wiki.setGroup(group);
             wiki.setName(name);
-            wiki.setDescription(description);
+//            wiki.setDescription(description);
             wiki.setCustomUser(customUser);
             wiki.setUrl(url);
             wiki.setDate(date);

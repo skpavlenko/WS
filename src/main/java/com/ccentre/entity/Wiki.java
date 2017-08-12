@@ -18,12 +18,14 @@ public class Wiki {
     private Group group;
 
     private String name;
-    @Lob
-    private String description;
 
     @ManyToOne
     @JoinColumn(name = "customuser_id")
     private CustomUser customUser;
+
+    @OneToOne
+    @JoinColumn(name = "wikitext_id")
+    private WikiText wikiText;
 
     @Type(type = "text")
     private String url;
@@ -41,7 +43,6 @@ public class Wiki {
     public Wiki(Group group, String name, String description, CustomUser customUser, String url, Date date) {
         this.group = group;
         this.name = name;
-        this.description = description;
         this.customUser = customUser;
         this.url = url;
         this.date = date;
@@ -50,7 +51,6 @@ public class Wiki {
     public Wiki(Group group, String name, String description, CustomUser customUser, String url, Date date, Blob pdf) {
         this.group = group;
         this.name = name;
-        this.description = description;
         this.customUser = customUser;
         this.url = url;
         this.date = date;
@@ -79,14 +79,6 @@ public class Wiki {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public CustomUser getCustomUser() {
