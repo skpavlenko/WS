@@ -40,7 +40,7 @@ public class Wiki {
     public Wiki() {
     }
 
-    public Wiki(Group group, String name, String description, CustomUser customUser, String url, Date date) {
+    public Wiki(Group group, String name, CustomUser customUser, String url, Date date) {
         this.group = group;
         this.name = name;
         this.customUser = customUser;
@@ -48,7 +48,7 @@ public class Wiki {
         this.date = date;
     }
 
-    public Wiki(Group group, String name, String description, CustomUser customUser, String url, Date date, Blob pdf) {
+    public Wiki(Group group, String name, CustomUser customUser, String url, Date date, Blob pdf) {
         this.group = group;
         this.name = name;
         this.customUser = customUser;
@@ -119,5 +119,13 @@ public class Wiki {
 
     public void setPdf(Blob pdf) {
         this.pdf = pdf;
+    }
+
+    public WikiText getWikiText() {
+        return wikiText;
+    }
+
+    public void setWikiText(WikiText wikiText) {
+        this.wikiText = wikiText;
     }
 }

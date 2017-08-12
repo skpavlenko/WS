@@ -1,8 +1,6 @@
 package com.ccentre.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "wikitext")
@@ -16,5 +14,15 @@ public class WikiText {
     public WikiText() {
     }
 
+    public WikiText(String description) {
+        this.description = description;
+    }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

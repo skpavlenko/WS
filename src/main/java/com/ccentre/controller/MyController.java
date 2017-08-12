@@ -48,6 +48,9 @@ public class MyController {
     private WikiService wikiService;
 
     @Autowired
+    private WikiTextService wikiTextService;
+
+    @Autowired
     UserDocumentService userDocumentService;
 
     @Autowired
@@ -284,7 +287,7 @@ public class MyController {
             model.addAttribute("id", id);
             model.addAttribute("grp", wiki.getGroup());
             model.addAttribute("name", wiki.getName());
-//            model.addAttribute("description", wiki.getDescription());
+            model.addAttribute("description", wiki.getWikiText().getDescription());
             model.addAttribute("customUser", wiki.getCustomUser());
             model.addAttribute("url", wiki.getUrl());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -300,16 +303,6 @@ public class MyController {
     public String groupAddPage() {
         return "group_add_page";
     }
-
-    /*@RequestMapping("/group")
-    public String listGroup(@RequestParam(value = "group") long groupId, Model model) {
-        Group group = (groupId != DEFAULT_GROUP_ID) ? contactService.findGroup(groupId) : null;
-
-        model.addAttribute("groups", contactService.listGroups());
-        model.addAttribute("currentGroup", group);
-        model.addAttribute("contacts", contactService.list(group));
-        return "wiki";
-    }*/
 
     @RequestMapping("/group/{id}")
     public String listGroup(@PathVariable(value = "id") long groupId, Model model) {
@@ -357,15 +350,10 @@ public class MyController {
         //date
         if (date==null) date = new Date(System.currentTimeMillis());
 
-        Wiki wiki = null;
-        if (pdf.isEmpty())
-            wiki = new Wiki(group, name, description, customUser, url, date);
-        else try {
-            wiki = new Wiki(group, name, description, customUser, url, date, new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Wiki wiki = setPDF(group, name, customUser, url, date, pdf);
         wikiService.add(wiki);
+
+        setDescr(wiki, description);
 
         model.addAttribute("groups", wikiService.listGroups());
         model.addAttribute("wikis", wikiService.list());
@@ -380,6 +368,29 @@ public class MyController {
         model.addAttribute("documents", documents);
 
         return "redirect:/wiki";
+    }
+
+    private Wiki setPDF(Group group, String name, CustomUser customUser, String url, Date date, MultipartFile pdf) {
+        Wiki wiki = null;
+        if (pdf.isEmpty())
+            wiki = new Wiki(group, name, customUser, url, date);
+        else try {
+            wiki = new Wiki(group, name, customUser, url, date, new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return wiki;
+    }
+
+    void setDescr(Wiki wiki, String description) {
+        //description
+        WikiText wikiText;
+        if (wiki.getWikiText() == null) {
+            wikiText = new WikiText(description);
+            wikiTextService.add(wikiText);
+            wiki.setWikiText(wikiText);
+        } else
+            wiki.getWikiText().setDescription(description);
     }
 
     @RequestMapping(value = "/wiki/edit", method = RequestMethod.POST)
@@ -402,7 +413,6 @@ public class MyController {
         if (wiki != null) {
             wiki.setGroup(group);
             wiki.setName(name);
-//            wiki.setDescription(description);
             wiki.setCustomUser(customUser);
             wiki.setUrl(url);
             wiki.setDate(date);
@@ -414,15 +424,11 @@ public class MyController {
                 }
 
         } else {
-            if (pdf.isEmpty())
-                wiki = new Wiki(group, name, description, customUser, url, date);
-            else try {
-                wiki = new Wiki(group, name, description, customUser, url, date, new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            wiki = setPDF(group, name, customUser, url, date, pdf);
         };
         wikiService.add(wiki);
+
+        setDescr(wiki, description);
 
         model.addAttribute("groups", wikiService.listGroups());
         model.addAttribute("wikis", wikiService.list());
