@@ -38,7 +38,6 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @EnableJpaRepositories("com.ccentre.repository")
 @PropertySource("classpath:config.properties")
 @EnableTransactionManagement
-@EnableWebMvc
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Value("${hibernate.dialect}")
     private String sqlDialect;

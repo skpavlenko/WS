@@ -35,8 +35,6 @@
                                         <a href=${partner.url}>Подробнее</a> <i
                                             class="fa fa-arrow-right"></i></button>
                                 </div>
-                            </security:authorize>
-                            <security:authorize access="hasAnyRole('ADMIN')">
                                 <div>
                                     <button type="button" class="btn btn-default edit_partner"
                                             value="${partner.id}">

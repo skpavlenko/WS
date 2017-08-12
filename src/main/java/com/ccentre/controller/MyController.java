@@ -74,7 +74,7 @@ public class MyController {
         model.addAttribute("phone", dbUser.getPhone());
         model.addAttribute("skype", dbUser.getSkype());
 
-        return "redirect:/partners";
+        return "redirect:/wiki";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -285,7 +285,7 @@ public class MyController {
             model.addAttribute("grp", wiki.getGroup());
             model.addAttribute("name", wiki.getName());
             model.addAttribute("description", wiki.getDescription());
-            //model.addAttribute("customUser", wiki.getCustomUser());
+            model.addAttribute("customUser", wiki.getCustomUser());
             model.addAttribute("url", wiki.getUrl());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             model.addAttribute("date", sdf.format(wiki.getDate()));
@@ -343,18 +343,25 @@ public class MyController {
     public String wikiAdd(@RequestParam(value = "group") long groupId,
                           @RequestParam String name,
                           @RequestParam String description,
-                          //@RequestParam CustomUser customUser,
                           @RequestParam String url,
                           @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
                           @RequestParam MultipartFile pdf,
                           ModelMap model) {
         Group group = (groupId != DEFAULT_GROUP_ID) ? wikiService.findGroup(groupId) : null;
 
+        //get current user
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String login = user.getUsername();
+        CustomUser customUser = userService.getUserByLogin(login);
+
+        //date
+        if (date==null) date = new Date(System.currentTimeMillis());
+
         Wiki wiki = null;
         if (pdf.isEmpty())
-            wiki = new Wiki(group, name, description, url, date);
+            wiki = new Wiki(group, name, description, customUser, url, date);
         else try {
-            wiki = new Wiki(group, name, description, url, date, new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
+            wiki = new Wiki(group, name, description, customUser, url, date, new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -380,19 +387,23 @@ public class MyController {
                               @RequestParam long id,
                               @RequestParam String name,
                               @RequestParam String description,
-                              //@RequestParam CustomUser customUser,
                               @RequestParam String url,
                               @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
                               @RequestParam MultipartFile pdf,
                               ModelMap model) {
         Group group = (groupId != DEFAULT_GROUP_ID) ? wikiService.findGroup(groupId) : null;
 
+        //get current user
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String login = user.getUsername();
+        CustomUser customUser = userService.getUserByLogin(login);
+
         Wiki wiki = wikiService.getWikiById(id);
         if (wiki != null) {
             wiki.setGroup(group);
             wiki.setName(name);
             wiki.setDescription(description);
-            //wiki.setCustomUser(customUser);
+            wiki.setCustomUser(customUser);
             wiki.setUrl(url);
             wiki.setDate(date);
             if (!pdf.isEmpty())
@@ -404,9 +415,9 @@ public class MyController {
 
         } else {
             if (pdf.isEmpty())
-                wiki = new Wiki(group, name, description, url, date);
+                wiki = new Wiki(group, name, description, customUser, url, date);
             else try {
-                wiki = new Wiki(group, name, description, url, date, new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
+                wiki = new Wiki(group, name, description, customUser, url, date, new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
             } catch (Exception e) {
                 e.printStackTrace();
             }

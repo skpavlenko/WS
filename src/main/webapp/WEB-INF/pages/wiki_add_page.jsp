@@ -36,12 +36,22 @@
                         </c:forEach>
                     </select>
                     <input class="form-control form-group" type="text" name="name" placeholder="Name" value="${name}">
-                    <input class="form-control form-group" type="text" name="description" placeholder="Description"
-                           value="${description}">
+                    <%--<input class="form-control form-group" type="textarea rows='10' cols='45'" name="description" placeholder="Description"
+                           value="${description}">--%>
+                    <textarea class="form-control form-group" rows="30" name="description">${description}</textarea>
                     <input class="form-control form-group" type="text" name="url" placeholder="URL" value="${url}">
                     <input class="form-control form-group" type="date" name="date" placeholder="Date" value="${date}">
-                    <input class="form-control-file form-group" type="file" name="pdf" placeholder="PDF">
-                    <input type="submit" class="btn btn-primary" value="Add">
+                    <c:if test = "${id ne null}">
+                        <input class="form-control form-group" type="text" name="customUser" placeholder="CustomUser" value="${customUser}" readonly>
+                    </c:if>
+                    <security:authorize access="hasAnyRole('ADMIN')">
+                        <div class="container">
+                            <p>PDF display mode</p>
+                            <input class="form-control-file form-group" type="file" name="pdf" placeholder="PDF">
+                        </div>
+
+                        <input type="submit" class="btn btn-primary" value="Add">
+                    </security:authorize>
                 </form>
             </div>
             <div class="tab-pane" id="2">

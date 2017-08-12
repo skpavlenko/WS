@@ -18,6 +18,7 @@ public class Wiki {
     private Group group;
 
     private String name;
+    @Lob
     private String description;
 
     @ManyToOne
@@ -37,20 +38,20 @@ public class Wiki {
     public Wiki() {
     }
 
-    public Wiki(Group group, String name, String description, String url, Date date) {
+    public Wiki(Group group, String name, String description, CustomUser customUser, String url, Date date) {
         this.group = group;
         this.name = name;
         this.description = description;
-        //this.customUser = customUser;
+        this.customUser = customUser;
         this.url = url;
         this.date = date;
     }
 
-    public Wiki(Group group, String name, String description, String url, Date date, Blob pdf) {
+    public Wiki(Group group, String name, String description, CustomUser customUser, String url, Date date, Blob pdf) {
         this.group = group;
         this.name = name;
         this.description = description;
-        //this.customUser = customUser;
+        this.customUser = customUser;
         this.url = url;
         this.date = date;
         this.pdf = pdf;

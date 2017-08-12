@@ -32,9 +32,9 @@
                         class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#cf">Контакты</a></li>
-                        <li><a href="#">Зарегистрироваться</a></li>
-                        <li><a href="#">Задать вопрос</a></li>
-                        <security:authorize access="hasAnyRole('ADMIN')">
+                        <li><a href="register">Зарегистрироваться</a></li>
+                        <%--<li><a href="#">Задать вопрос</a></li>--%>
+                        <security:authorize access="hasAnyRole('ADMIN', 'USER')">
                             <li class="divider"></li>
                             <li><a href="/logout">Выход</a></li>
                         </security:authorize>

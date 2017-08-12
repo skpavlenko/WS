@@ -48,16 +48,18 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul id="groupList" class="nav navbar-nav">
-                    <li>
-                        <button type="button" id="add_wiki" class="btn btn-default navbar-btn">Add Wiki</button>
-                    </li>
-                    <li>
-                        <button type="button" id="add_group" class="btn btn-default navbar-btn">Add Group</button>
-                    </li>
-                    <li>
-                        <button type="button" id="delete_wiki" class="btn btn-default navbar-btn">Delete Wiki
-                        </button>
-                    </li>
+                    <security:authorize access="hasAnyRole('ADMIN')">
+                        <li>
+                            <button type="button" id="add_wiki" class="btn btn-default navbar-btn">Add Wiki</button>
+                        </li>
+                        <li>
+                            <button type="button" id="add_group" class="btn btn-default navbar-btn">Add Group</button>
+                        </li>
+                        <li>
+                            <button type="button" id="delete_wiki" class="btn btn-default navbar-btn">Delete Wiki
+                            </button>
+                        </li>
+                    </security:authorize>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Groups <span class="caret"></span></a>
@@ -83,20 +85,23 @@
     <table id="example" class="table table-striped">
         <thead>
         <tr>
-            <td></td>
+            <security:authorize access="hasAnyRole('ADMIN')">
+                <td></td>
+            </security:authorize>
             <td><b>Name</b></td>
-            <td><b>Description</b></td>
             <td><b>URL</b></td>
             <td><b>Date</b></td>
             <td><b>Group</b></td>
+            <td><b>User</b></td>
             <td><b>Upload/Download Files</b></td>
         </tr>
         </thead>
         <c:forEach items="${wikis}" var="wiki">
             <tr>
-                <td><input type="checkbox" name="toDelete[]" value="${wiki.id}" id="checkbox_${wiki.id}"/></td>
+                <security:authorize access="hasAnyRole('ADMIN')">
+                    <td><input type="checkbox" name="toDelete[]" value="${wiki.id}" id="checkbox_${wiki.id}"/></td>
+                </security:authorize>
                 <td><a href=/wiki_edit_page?id=${wiki.id}>${wiki.name}</a></td>
-                <td>${wiki.description}</td>
                 <td><a href=${wiki.url}>${wiki.url}</a></td>
                 <td>${wiki.date}</td>
                 <c:choose>
@@ -107,6 +112,7 @@
                         <td>Default</td>
                     </c:otherwise>
                 </c:choose>
+                <td>${wiki.customUser}</td>
                 <td><a href=/add-document-${wiki.id}>Click</a></td>
             </tr>
         </c:forEach>

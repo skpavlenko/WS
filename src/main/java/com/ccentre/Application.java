@@ -44,7 +44,6 @@ public class Application extends SpringBootServletInitializer {
             public void run(String... strings) throws Exception {
                 if (userService.listUser().size()==0)
                 userService.addUser(new CustomUser("admin", "d033e22ae348aeb5660fc2140aec35850c4da997", UserRole.ADMIN));
-                //userService.addUser(new CustomUser("user", "12dea96fec20593566ab75692c9949596833adc9", UserRole.USER));
             }
         };
     }

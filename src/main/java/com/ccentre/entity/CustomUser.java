@@ -106,4 +106,9 @@ public class CustomUser {
     public void setWikis(List<Wiki> wikis) {
         this.wikis = wikis;
     }
+
+    @Override
+    public String toString() {
+        return login;
+    }
 }
