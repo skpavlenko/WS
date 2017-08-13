@@ -51,4 +51,12 @@
     <put-attribute name="body" value="/WEB-INF/pages/managedocuments.jsp" />
   </definition>
 
+  <definition name="userslist" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/userslist.jsp" />
+  </definition>
+
+  <definition name="useredit" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/useredit.jsp" />
+  </definition>
+
 </tiles-definitions>

@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -271,6 +272,12 @@ public class MyController {
         return "wiki";
     }
 
+    @RequestMapping("/userslist")
+    public String userslist(Model model) {
+        model.addAttribute("users", userService.listUser());
+        return "userslist";
+    }
+
     @RequestMapping("/wiki_add_page")
     public String wikiAddPage(ModelMap model) {
         model.addAttribute("groups", wikiService.listGroups());
@@ -382,7 +389,7 @@ public class MyController {
         return wiki;
     }
 
-    void setDescr(Wiki wiki, String description) {
+    private void setDescr(Wiki wiki, String description) {
         //description
         WikiText wikiText;
         if (wiki.getWikiText() == null) {
@@ -515,5 +522,49 @@ public class MyController {
         document.setContent(multipartFile.getBytes());
         document.setWiki(wiki);
         userDocumentService.saveDocument(document);
+    }
+
+    @RequestMapping("/useredit")
+    public String userEditPage(@RequestParam long id,
+                               ModelMap model) {
+        CustomUser customUser = userService.getUserById(id);
+
+        if (customUser != null) {
+            model.addAttribute("id", id);
+            model.addAttribute("rle", customUser.getRole().name());
+            model.addAttribute("login", customUser.getLogin());
+            model.addAttribute("email", customUser.getEmail());
+            model.addAttribute("phone", customUser.getPhone());
+            model.addAttribute("skype", customUser.getSkype());
+        }
+        List<String> userRoles = new ArrayList<String>();
+        for(UserRole ur: UserRole.values()) {userRoles.add(ur.name());}
+        model.addAttribute("roles", userRoles);
+
+        return "useredit";
+    }
+
+    @RequestMapping(value = "/user/edit", method = RequestMethod.POST)
+    public String userUpdate(@RequestParam Long id,
+                             @RequestParam String login,
+                             @RequestParam String role,
+                             @RequestParam String password,
+                             @RequestParam(required = false) String email,
+                             @RequestParam(required = false) String phone,
+                             @RequestParam(required = false) String skype,
+                             Model model) {
+        CustomUser dbUser = userService.getUserById(id);
+
+        ShaPasswordEncoder encoder = new ShaPasswordEncoder();
+        String passHash = encoder.encodePassword(password, null);
+
+        dbUser.setRole(UserRole.valueOf(role));
+        dbUser.setPassword(passHash);
+        dbUser.setEmail(email);
+        dbUser.setPhone(phone);
+        dbUser.setSkype(skype);
+        userService.addUser(dbUser);
+
+        return "redirect:/userslist";
     }
 }

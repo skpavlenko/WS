@@ -43,4 +43,10 @@ public class UserServiceImpl implements UserService {
     public List<CustomUser> listUser() {
         return userRepository.findAll();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public CustomUser getUserById(Long id) {
+        return userRepository.findOne(id);
+    }
 }
