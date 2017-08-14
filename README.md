@@ -24,21 +24,21 @@ masonry с компаниями, с которыми мы сотрудничае
 
 <h4>Сайт работает на VPS с Debian Linux 2.6.32-37-pve + Spring Boot 1.3.5 и MySQL 5.6<br><br>
 Используемые технологии: 
-- Spring Boot 1.3.5
-- Spring MVC 4.1.0
-- Spring Security 4.1.0
-- JPA/Hibernate 4.3.10.Final
-- MySQL Server 5.6
-- validation-api 1.1.0.Final
-- hibernate-validator 5.1.3.Final
-- Bootstrap v3.3.2
-- Maven 3
-- JDK 1.8
-- Tomcat 8.0.33
-- Salvattore 1.0.9
-- PDFObject v2.0.201604172 from Mozilla
-- DataTables Bootstrap 3 integreation
-- Java EE
-- JSP/JSTL
-- CSS, JavaScript, JQery.
+- Spring Boot 1.3.5<br>
+- Spring MVC 4.1.0<br>
+- Spring Security 4.1.0<br>
+- JPA/Hibernate 4.3.10.Final<br>
+- MySQL Server 5.6<br>
+- validation-api 1.1.0.Final<br>
+- hibernate-validator 5.1.3.Final<br>
+- Bootstrap v3.3.2<br>
+- Maven 3<br>
+- JDK 1.8<br>
+- Tomcat 8.0.33<br>
+- Salvattore 1.0.9<br>
+- PDFObject v2.0.201604172 from Mozilla<br>
+- DataTables Bootstrap 3 integreation<br>
+- Java EE<br>
+- JSP/JSTL<br>
+- CSS, JavaScript, jQuery.<br>
 </h4>
