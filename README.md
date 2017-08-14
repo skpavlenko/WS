@@ -13,17 +13,17 @@ masonry с компаниями, с которыми мы сотрудничае
 
 При введении логина/пароля администратора (admin/admin) пользователь перенаправляется на страницу администрирования сетки, 
 где можно добавлять, удалять выделенные элементы (флажок в правом нижнем углу записей сетки) <br> 
-<img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WebSite/blob/master/screenshot/admin.png"><br> <br>
+<img style="max-width:100%;" alt="Partners" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Partners.jpg"><br> <br>
 редактировать и определять порядок их следования, с помощью поля Порядок. <br><br>
-<img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WebSite/blob/master/screenshot/edit.png"><br> <br>
+<img style="max-width:100%;" alt="Edit partners" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Partners_edit.jpg"><br> <br>
 
-Так же в любой момент на страницу администрирования можно перейти нажав О нас – Администрирование. Для выхода нажать Сервис – Выход.<br><br>
+Для выхода нажать О нас – Выход.<br><br>
 <img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WebSite/blob/master/screenshot/menu.png"><br> <br>
 
 Изображения логотипов сохраняются в базе данных MySQL, в поле с типом BLOB.<br> <br>
 
 <h4>Сайт работает на VPS с Debian Linux 2.6.32-37-pve + Spring Boot 1.3.5 и MySQL 5.6<br><br>
-Используемые технологии: 
+Используемые технологии: <br>
 - Spring Boot 1.3.5<br>
 - Spring MVC 4.1.0<br>
 - Spring Security 4.1.0<br>
