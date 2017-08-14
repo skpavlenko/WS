@@ -394,10 +394,12 @@ public class MyController {
         WikiText wikiText;
         if (wiki.getWikiText() == null) {
             wikiText = new WikiText(description);
-            wikiTextService.add(wikiText);
             wiki.setWikiText(wikiText);
-        } else
-            wiki.getWikiText().setDescription(description);
+        } else {
+            wikiText = wiki.getWikiText();
+            wikiText.setDescription(description);
+        }
+        wikiTextService.add(wikiText);
     }
 
     @RequestMapping(value = "/wiki/edit", method = RequestMethod.POST)

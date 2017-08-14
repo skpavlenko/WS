@@ -3,7 +3,7 @@ package com.ccentre.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="USER_DOCUMENT")
+@Table(name="user_document")
 public class UserDocument {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
