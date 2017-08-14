@@ -19,7 +19,7 @@
 Так же имеется рекламный блок - на странице Партнеры отображается адаптивная сетка 
 masonry с компаниями, с которыми мы сотрудничаем.<br> 
 
-<a href="http://1c-centre.com/partnerslist"><img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Partners.jpg"></a>
+<a href="http://1c-centre.com/partners"><img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Partners.jpg"></a>
 <br> 
 
 При введении логина/пароля администратора (admin/admin) пользователь получает возможность администрирования сетки, 
