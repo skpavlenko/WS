@@ -102,7 +102,7 @@
                     <td><input type="checkbox" name="toDelete[]" value="${wiki.id}" id="checkbox_${wiki.id}"/></td>
                 </security:authorize>
                 <td><a href=/wiki_edit_page?id=${wiki.id}>${wiki.name}</a></td>
-                <td><a href=${wiki.url}>${wiki.url}</a></td>
+                <td><a href=${wiki.url}>Click</a></td>
                 <td>${wiki.date}</td>
                 <c:choose>
                     <c:when test="${wiki.group ne null}">
