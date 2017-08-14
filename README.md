@@ -36,6 +36,7 @@ masonry с компаниями, с которыми мы сотрудничае
 - Spring Boot 1.3.5<br>
 - Spring MVC 4.1.0<br>
 - Spring Security 4.1.0<br>
+- Apache Tiles 3.0.7<br>
 - JPA/Hibernate 4.3.10.Final<br>
 - MySQL Server 5.6<br>
 - validation-api 1.1.0.Final<br>
