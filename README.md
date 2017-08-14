@@ -1,9 +1,11 @@
-# WebSite
+# Сайт компании-разработчика
 
-<h2>Сайт компании 1С-франчайзи</h2> <br>
+<h2>Технический справочник</h2> <br>
 <a href="http://1c-centre.com/"><img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Title.jpg"></a>
 
-В данный момент кроме страницы Партнеры остальные страницы статическое украшательство. На странице Партнеры отображается адаптивная сетка 
+
+
+На странице Партнеры отображается адаптивная сетка 
 masonry с компаниями, с которыми мы сотрудничаем.<br> 
 
 <a href="http://1c-centre.com//partnerslist"><img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WebSite/blob/master/screenshot/partners.png"></a>
@@ -15,11 +17,28 @@ masonry с компаниями, с которыми мы сотрудничае
 редактировать и определять порядок их следования, с помощью поля Порядок. <br><br>
 <img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WebSite/blob/master/screenshot/edit.png"><br> <br>
 
-Так же в любой момент на страницу администрирования можно перейти нажав Сервис – Администрирование. Для выхода нажать Сервис – Выход.<br><br>
+Так же в любой момент на страницу администрирования можно перейти нажав О нас – Администрирование. Для выхода нажать Сервис – Выход.<br><br>
 <img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WebSite/blob/master/screenshot/menu.png"><br> <br>
 
 Изображения логотипов сохраняются в базе данных MySQL, в поле с типом BLOB.<br> <br>
 
-<h4>Сайт поднят на VPS с Debian Linux + каркас Spring Boot и MySQL <br><br>
-Используемые технологии: Java EE, Maven, Spring Boot, Spring MVC, Spring Data, Spring Security, 
-JPA/Hibernate, MySQL, JSP/JSTL, Bootstrap, CSS, JavaScript.</h4>
+<h4>Сайт работает на VPS с Debian Linux 2.6.32-37-pve + Spring Boot 1.3.5 и MySQL 5.6<br><br>
+Используемые технологии: 
+- Spring Boot 1.3.5
+- Spring MVC 4.1.0
+- Spring Security 4.1.0
+- JPA/Hibernate 4.3.10.Final
+- MySQL Server 5.6
+- validation-api 1.1.0.Final
+- hibernate-validator 5.1.3.Final
+- Bootstrap v3.3.2
+- Maven 3
+- JDK 1.8
+- Tomcat 8.0.33
+- Salvattore 1.0.9
+- PDFObject v2.0.201604172 from Mozilla
+- DataTables Bootstrap 3 integreation
+- Java EE
+- JSP/JSTL
+- CSS, JavaScript, JQery.
+</h4>
