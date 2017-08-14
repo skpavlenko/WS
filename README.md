@@ -4,6 +4,7 @@
 <a href="http://1c-centre.com/"><img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Title.jpg"></a>
 <br><br>
 Идея сайта была подсмотрена у <a href="https://www.mkyong.com/">https://www.mkyong.com/</a>. В результате получился сайт, предназначенный для хранения технической информации в виде каталогизированных заметок, с поиском и связанными с ними файлами библиотек и обработок.
+Протестирована возможность запуска артефакта как в режиме Embedded Web Server Deployment, так и Java EE Application Server.
 <a href="http://1c-centre.com/wiki"><img style="max-width:100%;" alt="Wiki's" src="https://github.com/skpavlenko/WS/blob/master/screenshots/wikislist.jpg"></a>
 <br> 
 Заметки создаются в режиме администрирования, содержат информацию о дате внесения, пользователе, а так же ссылку на первоисточник. 
