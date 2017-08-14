@@ -32,7 +32,7 @@ masonry с компаниями, с которыми мы сотрудничае
 Изображения логотипов, связанные файлы и PDF-отображение заметок сохраняются в базе данных MySQL, в полях с типом BLOB.<br>
 
 <h4>Сайт работает на VPS с Debian Linux 2.6.32-37-pve + Spring Boot 1.3.5 и MySQL 5.6<br><br>
-Используемые технологии: <br>
+Following technologies being used:<br>
 - Spring Boot 1.3.5<br>
 - Spring MVC 4.1.0<br>
 - Spring Security 4.1.0<br>
