@@ -3,24 +3,33 @@
 <h2>Технический справочник</h2> <br>
 <a href="http://1c-centre.com/"><img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Title.jpg"></a>
 
+Сайт сделан по идее известнейшего <a href="https://www.mkyong.com/">https://www.mkyong.com/</a> для хранения технической информации в виде каталогизированных заметок, с поиском и связанными с ними файлами библиотек и обработок.
+<a href="http://1c-centre.com/wiki"><img style="max-width:100%;" alt="Wiki's" src="https://github.com/skpavlenko/WS/blob/master/screenshots/wikislist.jpg"></a>
+<br> 
+Заметки создаются в режиме администрирования, содержат информацию о дате внесения, пользователе, а так же ссылку на первоисточник. 
+Заметка может быть отображена в виде простого текста:
+<img style="max-width:100%;" alt="Partners" src="https://github.com/skpavlenko/WS/blob/master/screenshots/PlainText.jpg">
+Либо, при необходимости с графической информацией, с помощью PDFObject v2.0.201604172 from Mozilla
+<img style="max-width:100%;" alt="Partners" src="https://github.com/skpavlenko/WS/blob/master/screenshots/PDFViewing.jpg">
 
+Заметки могут иметь присоединенные файлы, которыми можно управлять в режиме администрирования, либо только загружать из режима гостя. Интерфейс панели управления связанными файлами:
+<img style="max-width:100%;" alt="Partners" src="https://github.com/skpavlenko/WS/blob/master/screenshots/ManageDocuments.jpg">
 
-На странице Партнеры отображается адаптивная сетка 
+Так же имеется рекламный блок - на странице Партнеры отображается адаптивная сетка 
 masonry с компаниями, с которыми мы сотрудничаем.<br> 
 
-<a href="http://1c-centre.com//partnerslist"><img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WebSite/blob/master/screenshot/partners.png"></a>
+<a href="http://1c-centre.com/partnerslist"><img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Partners.jpg"></a>
 <br> 
 
-При введении логина/пароля администратора (admin/admin) пользователь перенаправляется на страницу администрирования сетки, 
+При введении логина/пароля администратора (admin/admin) пользователь получает возможность администрирования сетки, 
 где можно добавлять, удалять выделенные элементы (флажок в правом нижнем углу записей сетки) <br> 
-<img style="max-width:100%;" alt="Partners" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Partners.jpg"><br> <br>
+<img style="max-width:100%;" alt="Partners" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Partners_edit.jpg"><br> <br>
 редактировать и определять порядок их следования, с помощью поля Порядок. <br><br>
-<img style="max-width:100%;" alt="Edit partners" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Partners_edit.jpg"><br> <br>
 
-Для выхода нажать О нас – Выход.<br><br>
+Для выхода из режима администрирования нажать <h4>О нас – Выход</h4>.<br><br>
 <img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WebSite/blob/master/screenshot/menu.png"><br> <br>
 
-Изображения логотипов сохраняются в базе данных MySQL, в поле с типом BLOB.<br> <br>
+Изображения логотипов, связанные файлы и PDF-отображение заметок сохраняются в базе данных MySQL, в поле с типом BLOB.<br> <br>
 
 <h4>Сайт работает на VPS с Debian Linux 2.6.32-37-pve + Spring Boot 1.3.5 и MySQL 5.6<br><br>
 Используемые технологии: <br>
