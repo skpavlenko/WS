@@ -1,7 +1,7 @@
 # WebSite
 
 <h2>Сайт компании 1С-франчайзи</h2> <br>
-<a href="http://1c-centre.com/"><img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WebSite/blob/master/screenshot/Title.png"></a>
+<a href="http://1c-centre.com/"><img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WS/blob/master/screenshot/Title.png"></a>
 
 В данный момент кроме страницы Партнеры остальные страницы статическое украшательство. На странице Партнеры отображается адаптивная сетка 
 masonry с компаниями, с которыми мы сотрудничаем.<br> 
