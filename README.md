@@ -3,7 +3,7 @@
 <h2>Технический справочник</h2> <br>
 <a href="http://1c-centre.com/"><img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Title.jpg"></a>
 
-Сайт сделан по идее известнейшего <a href="https://www.mkyong.com/">https://www.mkyong.com/</a> для хранения технической информации в виде каталогизированных заметок, с поиском и связанными с ними файлами библиотек и обработок.
+Идея сайта была подсмотрена у <a href="https://www.mkyong.com/">https://www.mkyong.com/</a>. В результате получился сайт, предназначенный для хранения технической информации в виде каталогизированных заметок, с поиском и связанными с ними файлами библиотек и обработок.
 <a href="http://1c-centre.com/wiki"><img style="max-width:100%;" alt="Wiki's" src="https://github.com/skpavlenko/WS/blob/master/screenshots/wikislist.jpg"></a>
 <br> 
 Заметки создаются в режиме администрирования, содержат информацию о дате внесения, пользователе, а так же ссылку на первоисточник. 
@@ -26,8 +26,7 @@ masonry с компаниями, с которыми мы сотрудничае
 <img style="max-width:100%;" alt="Partners" src="https://github.com/skpavlenko/WS/blob/master/screenshots/Partners_edit.jpg"><br> <br>
 редактировать и определять порядок их следования, с помощью поля Порядок. <br><br>
 
-Для выхода из режима администрирования нажать <h4>О нас – Выход</h4>.<br><br>
-<img style="max-width:100%;" alt="WebSite" src="https://github.com/skpavlenko/WebSite/blob/master/screenshot/menu.png"><br> <br>
+Для выхода из режима администрирования нажать <h4>О нас – Выход</h4><br>
 
 Изображения логотипов, связанные файлы и PDF-отображение заметок сохраняются в базе данных MySQL, в поле с типом BLOB.<br> <br>
 
