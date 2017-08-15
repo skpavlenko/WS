@@ -74,7 +74,7 @@
                 </ul>
                 <form id="search" class="navbar-form navbar-left" role="search" action="/search" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="pattern" placeholder="Search">
+                        <input type="text" class="form-control" name="pattern" placeholder="Search by DB">
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
@@ -102,7 +102,7 @@
                     <td><input type="checkbox" name="toDelete[]" value="${wiki.id}" id="checkbox_${wiki.id}"/></td>
                 </security:authorize>
                 <td><a href=/wiki_edit_page?id=${wiki.id}>${wiki.name}</a></td>
-                <td><a href=${wiki.url}>Click</a></td>
+                <td><a href="${wiki.url}" class="btn btn-default btn-xs">...</a></td>
                 <td>${wiki.date}</td>
                 <c:choose>
                     <c:when test="${wiki.group ne null}">
@@ -113,7 +113,7 @@
                     </c:otherwise>
                 </c:choose>
                 <td>${wiki.customUser}</td>
-                <td><a href=/add-document-${wiki.id}>Click</a></td>
+                <td><a href="/add-document-${wiki.id}" class="btn btn-default btn-xs">...</a></td>
             </tr>
         </c:forEach>
     </table>
