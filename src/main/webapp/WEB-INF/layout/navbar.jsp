@@ -37,6 +37,7 @@
                         <security:authorize access="hasAnyRole('ADMIN', 'USER')">
                             <li class="divider"></li>
                             <security:authorize access="hasAnyRole('ADMIN')">
+                                <li><a href="/notes">Блокнот</a></li>
                                 <li><a href="/userslist">Список пользователей</a></li>
                             </security:authorize>
                             <li><a href="/logout">Выход</a></li>
