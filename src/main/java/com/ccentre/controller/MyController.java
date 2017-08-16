@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -59,6 +60,9 @@ public class MyController {
 
     @Autowired
     FileValidator fileValidator;
+
+    @Autowired
+    private NoteService noteService;
 
     @InitBinder("fileBucket")
     protected void initBinder(WebDataBinder binder) {
@@ -365,15 +369,6 @@ public class MyController {
         model.addAttribute("groups", wikiService.listGroups());
         model.addAttribute("wikis", wikiService.list());
 
-        //Documents
-        model.addAttribute("user", wiki);
-
-        FileBucket fileModel = new FileBucket();
-        model.addAttribute("fileBucket", fileModel);
-
-        List<UserDocument> documents = userDocumentService.findAllByWiki(wiki);
-        model.addAttribute("documents", documents);
-
         return "redirect:/wiki";
     }
 
@@ -487,6 +482,7 @@ public class MyController {
         return "redirect:/add-document-"+userId;
     }
 
+    @Secured("ADMIN")
     @RequestMapping(value = { "/add-document-{userId}" }, method = RequestMethod.POST)
     public String uploadDocument(@Valid FileBucket fileBucket, BindingResult result, ModelMap model, @PathVariable Long userId) throws IOException{
 
@@ -568,5 +564,129 @@ public class MyController {
         userService.addUser(dbUser);
 
         return "redirect:/userslist";
+    }
+
+    //note's controllers
+    @RequestMapping("/notes")
+    public String note(Model model) {
+        model.addAttribute("groups", noteService.listGroups());
+        model.addAttribute("notes", noteService.list());
+        return "notes";
+    }
+
+    @RequestMapping("/note_add_page")
+    public String noteAddPage(ModelMap model) {
+        model.addAttribute("groups", noteService.listGroups());
+
+        return "note_add_page";
+    }
+
+    @RequestMapping("/note_edit_page")
+    public String noteAddPage(@RequestParam long id,
+                              ModelMap model) {
+        Note note = noteService.getNoteById(id);
+
+        if (note != null) {
+            model.addAttribute("id", id);
+            model.addAttribute("grp", note.getGroup());
+            model.addAttribute("name", note.getName());
+            model.addAttribute("description", note.getDescription());
+            model.addAttribute("customUser", note.getCustomUser());
+            model.addAttribute("url", note.getUrl());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            model.addAttribute("date", sdf.format(note.getDate()));
+        }
+        ;
+        model.addAttribute("groups", noteService.listGroups());
+
+        return "note_add_page";
+    }
+
+    @RequestMapping("/groupnote/{id}")
+    public String listGroupNote(@PathVariable(value = "id") long groupId, Model model) {
+        Group group = (groupId != DEFAULT_GROUP_ID) ? noteService.findGroup(groupId) : null;
+
+        model.addAttribute("groups", noteService.listGroups());
+        model.addAttribute("currentGroup", group);
+        model.addAttribute("notes", noteService.list(group));
+        return "notes";
+    }
+
+    @RequestMapping(value = "/searchnote", method = RequestMethod.POST)
+    public String searchNote(@RequestParam String pattern, Model model) {
+        model.addAttribute("groups", noteService.listGroups());
+        model.addAttribute("notes", noteService.list(pattern));
+        return "notes";
+    }
+
+    @RequestMapping(value = "/note/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deleteNote(@RequestParam(value = "toDelete[]", required = false) long[] toDelete, Model model) {
+        if (toDelete != null) {
+            noteService.delete(toDelete);}
+
+        model.addAttribute("groups", noteService.listGroups());
+        model.addAttribute("notes", noteService.list());
+
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/note/add", method = RequestMethod.POST)
+    public String noteAdd(@RequestParam(value = "group") long groupId,
+                          @RequestParam String name,
+                          @RequestParam String description,
+                          @RequestParam String url,
+                          @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
+                          ModelMap model) {
+        Group group = (groupId != DEFAULT_GROUP_ID) ? noteService.findGroup(groupId) : null;
+
+        //get current user
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String login = user.getUsername();
+        CustomUser customUser = userService.getUserByLogin(login);
+
+        //date
+        if (date==null) date = new Date(System.currentTimeMillis());
+
+        Note note = new Note(group, name, description, customUser, url, date);
+        noteService.add(note);
+
+        model.addAttribute("groups", noteService.listGroups());
+        model.addAttribute("notes", noteService.list());
+
+        return "redirect:/notes";
+    }
+
+    @RequestMapping(value = "/note/edit", method = RequestMethod.POST)
+    public String noteEdit(@RequestParam(value = "group") long groupId,
+                              @RequestParam long id,
+                              @RequestParam String name,
+                              @RequestParam String description,
+                              @RequestParam String url,
+                              @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
+                              ModelMap model) {
+        Group group = (groupId != DEFAULT_GROUP_ID) ? wikiService.findGroup(groupId) : null;
+
+        //get current user
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String login = user.getUsername();
+        CustomUser customUser = userService.getUserByLogin(login);
+
+        Note note = noteService.getNoteById(id);
+        if (note != null) {
+            note.setGroup(group);
+            note.setName(name);
+            note.setDescription(description);
+            note.setCustomUser(customUser);
+            note.setUrl(url);
+            note.setDate(date);
+        } else {
+            note = new Note(group, name, description, customUser, url, date);
+        };
+        noteService.add(note);
+
+        model.addAttribute("groups", noteService.listGroups());
+        model.addAttribute("notes", noteService.list());
+
+        return "redirect:/notes";
     }
 }

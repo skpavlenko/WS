@@ -59,8 +59,12 @@
     <put-attribute name="body" value="/WEB-INF/pages/useredit.jsp" />
   </definition>
 
-  <definition name="note" extends="base">
-    <put-attribute name="body" value="/WEB-INF/pages/note.jsp" />
+  <definition name="notes" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/notes.jsp" />
+  </definition>
+
+  <definition name="note_add_page" extends="base">
+    <put-attribute name="body" value="/WEB-INF/pages/note_add_page.jsp" />
   </definition>
 
 </tiles-definitions>

@@ -28,7 +28,7 @@
                 <li><a href="index">Услуги</a></li>
                 <li><a href="wiki">Вики</a></li>
                 <li><a href="partners">Партнеры</a></li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">О нас<b
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Сервис<b
                         class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#cf">Контакты</a></li>
