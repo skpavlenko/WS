@@ -242,3 +242,28 @@ a.spoiler.collapsed:after {
 #search {
     margin-top: 17px;
 }
+
+.bookHeadline {
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.bookDescription {
+    font-size: 10pt;
+}
+
+label {
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+}
+
+.errorPage {
+    text-align:center;
+}
+
+.oops {
+    font-size: 76pt;
+}

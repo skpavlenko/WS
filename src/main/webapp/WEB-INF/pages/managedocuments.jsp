@@ -5,6 +5,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
+<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
 <div class="generic-container">
 	<div class="panel panel-default">
 		<!-- Default panel contents -->
