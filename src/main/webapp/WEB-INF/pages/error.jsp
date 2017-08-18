@@ -8,13 +8,10 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/dataTables.bootstrap.min.css' />"></link>
 <script type="text/javascript" language="javascript" src="<c:url value='/resources/js/jquery.dataTables.min.js' />">
 </script>
-<script type="text/javascript" language="javascript" src="<c:url value='/resources/js/dataTables.bootstrap.min.js' />">
-</script>
-
 
 <div class="errorPage">
     <span class="oops">Oops!</span><br/>
     <img src="resources/images/MissingPage.png"></img>
     <p>There seems to be a problem with the page you requested
-    <p th:text="${'Details: ' + message}"></p>
+    <p>Details: ${message}</p>
 </div>

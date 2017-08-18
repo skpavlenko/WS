@@ -56,20 +56,4 @@ public class Application extends SpringBootServletInitializer {
         servletContext.setInitParameter("contextConfigLocation", "<NONE>");
         super.onStartup(servletContext);
     }
-
-    @Bean
-    public EmbeddedServletContainerCustomizer containerCustomizer() {
-
-        return new EmbeddedServletContainerCustomizer() {
-            @Override
-            public void customize(ConfigurableEmbeddedServletContainer container) {
-
-                ErrorPage error401Page = new ErrorPage(HttpStatus.UNAUTHORIZED, "/error");
-                ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/error");
-                ErrorPage error500Page = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error");
-
-                container.addErrorPages(error401Page, error404Page, error500Page);
-            }
-        };
-    }
 }
