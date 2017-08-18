@@ -267,3 +267,8 @@ label {
 .oops {
     font-size: 76pt;
 }
+
+.img-responsive {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
