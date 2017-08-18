@@ -14,4 +14,5 @@
     <img src="resources/images/MissingPage.png"></img>
     <p>There seems to be a problem with the page you requested
     <p>Details: ${message}</p>
+    <br>
 </div>
