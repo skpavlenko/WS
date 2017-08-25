@@ -26,13 +26,13 @@
             <li class="active">
                 <a  href="#1" data-toggle="tab">Text</a>
             </li>
-            <li><a href="#2" data-toggle="tab">PDF/Files</a>
+            <li><a href="#2" data-toggle="tab">PDF</a>
             </li>
         </ul>
 
         <div class="tab-content ">
             <div class="tab-pane active" id="1">
-                <form role="form" enctype="multipart/form-data" class="form-horizontal" action=${(id eq null)?"/wiki/add":"/wiki/edit"} method="post">
+                <form id="text_view" role="form" enctype="multipart/form-data" class="form-horizontal" action=${(id eq null)?"/wiki/add":"/wiki/edit"} method="post">
                     <input class="form-control form-group" type="text" name="id" placeholder="id" value="${id}" readonly>
                     <select class="selectpicker form-control form-group" name="group">
                         <option value="-1">Default</option>
@@ -61,18 +61,18 @@
                 <c:if test = "${id ne null}">
                     <div id="pdf_view"></div>
                     <br>
+                    <button class="btn btn-default btn-xs" onclick="enterFullscreen('pdf_view')">Toggle frame content fullscreen</button>
                     <br>
                 </c:if>
-                <c:if test = "${id ne null}">
-                    <br>
-                    <span class="well pull-left">
-                        <a href="<c:url value='/add-document-${id}' />">Click here to upload/manage your documents</a>
-                    </span>
-                </c:if>
-
             </div>
         </div>
     </div>
+    <c:if test = "${id ne null}">
+        <br>
+        <span class="well pull-left">
+                        <a href="<c:url value='/add-document-${id}' />">Click here to upload/manage your documents</a>
+                    </span>
+    </c:if>
 </div>
 <br>
 <br>
@@ -89,3 +89,40 @@
     });
     </script>
 </c:if>
+<script>
+    document.cancelFullScreen = document.cancelFullScreen || document.webkitCancelFullScreen ||      document.mozCancelFullScreen;
+    function onFullScreenEnter() {
+        console.log("Enter fullscreen initiated from iframe");
+    };
+    function onFullScreenExit() {
+        console.log("Exit fullscreen initiated from iframe");
+    };
+    // Note: FF nightly needs about:config full-screen-api.enabled set to true.
+    function enterFullscreen(id) {
+        onFullScreenEnter(id);
+        var el =  document.getElementById(id);
+        var onfullscreenchange =  function(e){
+            var fullscreenElement = document.fullscreenElement || document.mozFullscreenElement || document.webkitFullscreenElement;
+            var fullscreenEnabled = document.fullscreenEnabled || document.mozFullscreenEnabled || document.webkitFullscreenEnabled;
+            console.log( 'fullscreenEnabled = ' + fullscreenEnabled, ',  fullscreenElement = ', fullscreenElement, ',  e = ', e);
+        }
+        el.addEventListener("webkitfullscreenchange", onfullscreenchange);
+        el.addEventListener("mozfullscreenchange",     onfullscreenchange);
+        el.addEventListener("fullscreenchange",             onfullscreenchange);
+        if (el.webkitRequestFullScreen) {
+            el.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        } else {
+            el.mozRequestFullScreen();
+        }
+        document.querySelector('#'+id + ' button').onclick = function(){
+            exitFullscreen(id);
+        }
+    }
+    function exitFullscreen(id) {
+        onFullScreenExit(id);
+        document.cancelFullScreen();
+        document.querySelector('#'+id + ' button').onclick = function(){
+            enterFullscreen(id);
+        }
+    }
+</script>
