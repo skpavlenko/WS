@@ -28,8 +28,8 @@
             <div class="carousel-caption">
                 <h3 class="hidden-xs">Cопровождение ПО включает комплекс услуг и сервисов по обновлению и доработке
                     систем на базе 1С от компании 1С ЦЕНТР.</h3>
-                <h4 class="hidden-xs">от 150 грн/час</h4>
-                <p class="hidden-sm hidden-md hidden-lg">Сопровождение 1С от 150 грн/час</p>
+                <%--<h4 class="hidden-xs">от 150 грн/час</h4>--%>
+                <p class="hidden-sm hidden-md hidden-lg">Сопровождение 1С</p>
             </div>
         </div>
         <div class="item"><img src="resources/images/slide-2.png" class="center-block" alt="">
@@ -49,8 +49,8 @@
         </div>
         <div class="item"><img src="resources/images/slide-4.jpg" class="center-block" alt="">
             <div id="wobl" class="carousel-caption">
-                <h3 class="hidden-xs">Обучение работе в типовых программных продуктах Фирмы "1С"</h3>
-                <h4 class="hidden-xs">от 150 грн/час</h4>
+                <h3 class="hidden-xs">Обучение работе в типовых программных продуктах компании "1С"</h3>
+                <%--<h4 class="hidden-xs">от 150 грн/час</h4>--%>
                 <p class="hidden-sm hidden-md hidden-lg">Обучение 1С</p>
             </div>
         </div>
@@ -63,7 +63,7 @@
         <div class="item"><img src="resources/images/slide-6.jpg" class="center-block" alt="">
             <div id="bow" class="carousel-caption">
                 <h3 class="hidden-xs">Комплексные бухгалтерские услуги - профессиональное обслуживание и дальнейшее
-                    сопровождение фирм</h3>
+                    сопровождение организаций</h3>
                 <p class="hidden-sm hidden-md hidden-lg">Комплексные бухгалтерские услуги</p>
             </div>
         </div>
@@ -76,7 +76,7 @@
         </div>
         <div class="item"><img src="resources/images/slide-8.jpg" class="center-block" alt="">
             <div class="carousel-caption">
-                <h3 class="hidden-xs">Ведение бухгалтерского учета предприятия на постоянной основе</h3>
+                <h3 class="hidden-xs">Ведение бухгалтерского учета предприятий</h3>
                 <p class="hidden-sm hidden-md hidden-lg">Ведение бухгалтерского учета</p>
             </div>
         </div>
@@ -111,8 +111,8 @@
         </div>
         <div class="item"><img src="resources/images/slide-13.jpg" class="center-block" alt="">
             <div class="carousel-caption">
-                <h3 class="hidden-xs">Так же проводим комплектное администрирование полностью всего компьютерного
-                    парка на предприятии.</h3>
+                <h3 class="hidden-xs">Так же проводим комплектное администрирование всего компьютерного
+                    парка предприятий.</h3>
                 <p class="hidden-sm hidden-md hidden-lg">Администрирование компьютерного парка</p>
             </div>
         </div>
