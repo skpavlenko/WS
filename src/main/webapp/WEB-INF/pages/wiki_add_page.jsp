@@ -12,6 +12,26 @@
 <style>
     .pdfobject-container { height: 500px;}
     .pdfobject { border: 1px solid #666; }
+    :-webkit-full-screen#pdf_view {
+        width:100%;
+        height:100%;
+        left:0;
+        top:0;
+        opacity:1;
+        display:block;
+        z-index:2;
+        /*-webkit-transition: all 0.5s 0.5s ease-in-out;*/
+    }
+    :-moz-full-screen#pdf_view {
+        width:100%;
+        height:100%;
+        left:0;
+        top:0;
+        opacity:1;
+        display:block;
+        z-index:2;
+        /*-moz-transition:    all 0.5s 0.5s ease-in-out;*/
+    }
 </style>
 
 <div class="container">
