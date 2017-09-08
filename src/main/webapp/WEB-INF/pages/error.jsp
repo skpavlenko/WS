@@ -8,6 +8,12 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/dataTables.bootstrap.min.css' />"></link>
 <script type="text/javascript" language="javascript" src="<c:url value='/resources/js/jquery.dataTables.min.js' />">
 </script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+<script src="<c:url value='/resources/js/salvattore.min.js' />"></script>
+
 
 <div class="errorPage">
     <span class="oops">Oops!</span><br/>
