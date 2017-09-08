@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/partner_add_page", "/partner/add", "/partner/delete", "/user/edit", "/userslist",
                 "/notes", "/note_add_page", "/note_edit_page", "/groupnote/{id}", "/searchnote", "/note/delete", "/note/add", "/note/edit",
-                "/wiki_add_page", "/group_add_page", "/wiki/delete", "/wiki/add", "/wiki/edit", "/group/add", "/add-document-{userId}",
+                "/wiki_add_page", "/group_add_page", "/wiki/delete", "/wiki/add", "/wiki/edit", "/group/add",
                 "/delete-document-{userId}-{docId}").hasRole("ADMIN")
                 .antMatchers("/register").permitAll()
                 .and()
