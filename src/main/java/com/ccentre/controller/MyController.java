@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ import java.util.List;
 import com.ccentre.entity.*;
 import com.ccentre.entity.enums.*;
 import com.ccentre.service.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -466,15 +466,35 @@ public class MyController {
 
 
     @RequestMapping(value = { "/download-document-{userId}-{docId}" }, method = RequestMethod.GET)
-    public String downloadDocument(@PathVariable Long userId, @PathVariable Integer docId, HttpServletResponse response) throws IOException {
+    public String downloadDocument(@PathVariable Long userId, @PathVariable Integer docId, @RequestHeader ("User-Agent") String userAgent, HttpServletResponse response) throws IOException {
         UserDocument document = userDocumentService.findById(docId);
         response.setContentType(document.getType());
         response.setContentLength(document.getContent().length);
-        response.setHeader("Content-Disposition","attachment; filename=\"" + document.getName() +"\"");
+        response.setHeader("Content-Disposition","attachment; filename=\"" + getContentDespositionFilename(userAgent, document.getName()) +"\"");
 
         FileCopyUtils.copy(document.getContent(), response.getOutputStream());
 
         return "redirect:/add-document-"+userId;
+    }
+
+    public static String getContentDespositionFilename(String agent, String fileName) {
+        try {
+            boolean isInternetExplorer = (agent.toLowerCase().indexOf("msie") > -1);
+            boolean isEdge = (agent.toLowerCase().indexOf("edge") > -1);
+            byte[] fileNameBytes;
+            if (isInternetExplorer && isEdge) {
+                return fileName;
+            } else {
+                fileNameBytes = fileName.getBytes("utf-8");
+            }
+            String dispositionFileName = "";
+            for (byte b : fileNameBytes) {
+                dispositionFileName += (char) (b & 0xff);
+            }
+            return dispositionFileName;
+        } catch (UnsupportedEncodingException ex) {
+        }
+        return fileName;
     }
 
     @RequestMapping(value = { "/delete-document-{userId}-{docId}" }, method = RequestMethod.GET)
