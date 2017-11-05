@@ -54,6 +54,9 @@ public class MyController {
     private WikiTextService wikiTextService;
 
     @Autowired
+    private WikiPDFService wikiPDFService;
+
+    @Autowired
     UserDocumentService userDocumentService;
 
     @Autowired
@@ -251,13 +254,13 @@ public class MyController {
         Wiki wiki = wikiService.getWikiById(id);
         int blobLength = 0;
         try {
-            blobLength = (int) wiki.getPdf().length();
+            blobLength = (int) wiki.getWikiPDF().getPdf().length();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         byte[] bytes = new byte[0];
         try {
-            bytes = wiki.getPdf().getBytes(1, blobLength);
+            bytes = wiki.getWikiPDF().getPdf().getBytes(1, blobLength);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -362,7 +365,7 @@ public class MyController {
         //date
         if (date==null) date = new Date(System.currentTimeMillis());
 
-        Wiki wiki = setPDF(group, name, customUser, url, date, pdf);
+        Wiki wiki = setWiki(group, name, customUser, url, date, pdf);
         wikiService.add(wiki);
 
         setDescr(wiki, description);
@@ -373,15 +376,11 @@ public class MyController {
         return "redirect:/wiki";
     }
 
-    private Wiki setPDF(Group group, String name, CustomUser customUser, String url, Date date, MultipartFile pdf) {
+    private Wiki setWiki(Group group, String name, CustomUser customUser, String url, Date date, MultipartFile pdf) {
         Wiki wiki = null;
-        if (pdf.isEmpty())
-            wiki = new Wiki(group, name, customUser, url, date);
-        else try {
-            wiki = new Wiki(group, name, customUser, url, date, new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        wiki = new Wiki(group, name, customUser, url, date);
+        if (!pdf.isEmpty()) setPDF(wiki, pdf);
+
         return wiki;
     }
 
@@ -396,6 +395,23 @@ public class MyController {
             wikiText.setDescription(description);
         }
         wikiTextService.add(wikiText);
+    }
+
+    private void setPDF(Wiki wiki, MultipartFile pdf) {
+        try {
+            //PDF
+            WikiPDF wikiPDF;
+            if (wiki.getWikiPDF() == null) {
+                wikiPDF = new WikiPDF(new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
+                wiki.setWikiPDF(wikiPDF);
+            } else {
+                wikiPDF = wiki.getWikiPDF();
+                wikiPDF.setPdf(new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
+            }
+            wikiPDFService.add(wikiPDF);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @RequestMapping(value = "/wiki/edit", method = RequestMethod.POST)
@@ -423,13 +439,13 @@ public class MyController {
             wiki.setDate(date);
             if (!pdf.isEmpty())
                 try {
-                    wiki.setPdf(new javax.sql.rowset.serial.SerialBlob(pdf.getBytes()));
+                    setPDF(wiki, pdf);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
         } else {
-            wiki = setPDF(group, name, customUser, url, date, pdf);
+            wiki = setWiki(group, name, customUser, url, date, pdf);
         };
         wikiService.add(wiki);
 

@@ -3,7 +3,6 @@ package com.ccentre.entity;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.sql.Blob;
 import java.util.*;
 
 @Entity
@@ -23,7 +22,7 @@ public class Wiki {
     @JoinColumn(name = "customuser_id")
     private CustomUser customUser;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wikitext_id")
     private WikiText wikiText;
 
@@ -31,11 +30,12 @@ public class Wiki {
     private String url;
     private Date date;
 
-    @OneToMany(mappedBy = "wiki", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "wiki", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UserDocument> userDocuments = new ArrayList<UserDocument>();
 
-    @Type(type = "blob")
-    private Blob pdf;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "wikipdf_id")
+    private WikiPDF wikiPDF;
 
     public Wiki() {
     }
@@ -46,15 +46,6 @@ public class Wiki {
         this.customUser = customUser;
         this.url = url;
         this.date = date;
-    }
-
-    public Wiki(Group group, String name, CustomUser customUser, String url, Date date, Blob pdf) {
-        this.group = group;
-        this.name = name;
-        this.customUser = customUser;
-        this.url = url;
-        this.date = date;
-        this.pdf = pdf;
     }
 
     public long getId() {
@@ -113,19 +104,19 @@ public class Wiki {
         this.userDocuments = userDocuments;
     }
 
-    public Blob getPdf() {
-        return pdf;
-    }
-
-    public void setPdf(Blob pdf) {
-        this.pdf = pdf;
-    }
-
     public WikiText getWikiText() {
         return wikiText;
     }
 
     public void setWikiText(WikiText wikiText) {
         this.wikiText = wikiText;
+    }
+
+    public WikiPDF getWikiPDF() {
+        return wikiPDF;
+    }
+
+    public void setWikiPDF(WikiPDF wikiPDF) {
+        this.wikiPDF = wikiPDF;
     }
 }
