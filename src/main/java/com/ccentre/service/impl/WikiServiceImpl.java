@@ -1,9 +1,6 @@
 package com.ccentre.service.impl;
 
-import com.ccentre.repository.WikiRepository;
-import com.ccentre.repository.GroupRepository;
-import com.ccentre.repository.WikiTextRepository;
-import com.ccentre.repository.UserDocumentRepository;
+import com.ccentre.repository.*;
 import com.ccentre.service.UserDocumentService;
 import com.ccentre.service.WikiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +21,9 @@ public class WikiServiceImpl implements WikiService {
 
     @Autowired
     private WikiTextRepository wikiTextRepository;
+
+    @Autowired
+    private WikiPDFRepository wikiPDFRepository;
 
     @Autowired
     private UserDocumentRepository userDocumentRepository;
@@ -51,6 +51,8 @@ public class WikiServiceImpl implements WikiService {
             c = wikiRepository.getOne(id);
             //del descr
             wikiTextRepository.delete(c.getWikiText());
+            //del pdf
+            wikiPDFRepository.delete(c.getWikiPDF());
             //del all files
             List<UserDocument> documents = userDocumentService.findAllByWiki(c);
             for (UserDocument u:
