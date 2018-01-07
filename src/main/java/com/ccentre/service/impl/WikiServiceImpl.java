@@ -48,11 +48,13 @@ public class WikiServiceImpl implements WikiService {
     public void delete(long[] ids) {
         Wiki c;
         for (long id : ids) {
-            c = wikiRepository.getOne(id);
+            c = wikiRepository.findOne(id);
             //del descr
-            wikiTextRepository.delete(c.getWikiText());
+            WikiText wikiText = c.getWikiText();
+            if(wikiText!=null) wikiTextRepository.delete(wikiText);
             //del pdf
-            wikiPDFRepository.delete(c.getWikiPDF());
+            WikiPDF wikiPDF = c.getWikiPDF();
+            if(wikiPDF!=null) wikiPDFRepository.delete(wikiPDF);
             //del all files
             List<UserDocument> documents = userDocumentService.findAllByWiki(c);
             for (UserDocument u:

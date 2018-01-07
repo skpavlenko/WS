@@ -60,7 +60,7 @@
                             <option value="${group.id}">${group.name}</option>
                         </c:forEach>
                     </select>
-                    <input class="form-control form-group" type="text" name="name" placeholder="Name" value="${name}">
+                    <input class="form-control form-group" type="text" name="name" placeholder="Name" value="${name}" required>
                     <textarea class="form-control form-group" rows="30" name="description">${description}</textarea>
                     <input class="form-control form-group" type="text" name="url" placeholder="URL" value="${url}">
                     <input class="form-control form-group" type="date" name="date" placeholder="Date" value="${date}">
